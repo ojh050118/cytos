@@ -7,3 +7,16 @@
 *.pdb
 *.xml
 *.bat
+*.cache
+*.sst
+build/inspectcode/_cytos.1466373549.00/BuildScriptCache/.crc
+build/inspectcode/_cytos.1466373549.00/CppIncludees/.crc
+build/inspectcode/_cytos.1466373549.00/CppWords/.crc
+*.log
+build/inspectcode/_cytos.1466373549.00/Db/LOCK
+build/inspectcode/_cytos.1466373549.00/Db/LOG
+build/inspectcode/_cytos.1466373549.00/Db/CURRENT
+build/inspectcode/_cytos.1466373549.00/CppWords/.version
+build/inspectcode/_cytos.1466373549.00/CppSourceFileToAllSymbolTables/.version
+build/inspectcode/_cytos.1466373549.00/FileDependencies/.version
+*.dat

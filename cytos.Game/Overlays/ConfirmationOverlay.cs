@@ -15,6 +15,5 @@ namespace cytos.Game.Overlays
 {
     public class ConfirmationOverlay : CytosOverlay
     {
-        
     }
 }
