@@ -1,0 +1,11 @@
+﻿{
+  "solution": {
+    "path": "cytos.sln",
+    "projects": [
+      "cytos.Desktop\\cytos.Desktop.csproj",
+      "cytos.Game\\cytos.Game.csproj",
+      "cytos.Game.Tests\\cytos.Game.Tests.csproj",
+      "cytos.Resources\\cytos.Resources.csproj"
+    ]
+  }
+}
