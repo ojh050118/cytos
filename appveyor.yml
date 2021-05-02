@@ -1,0 +1,31 @@
+clone_depth: 1
+version: '{branch}-{build}'
+image: Visual Studio 2019
+dotnet_csproj:
+  patch: true
+  file: 'cytos.Game\cytos.Game.csproj' # Use wildcard when it's able to exclude Xamarin projects
+  version: '0.0.{build}'
+cache:
+  - '%LOCALAPPDATA%\NuGet\v3-cache -> appveyor.yml'
+before_build:
+  - ps: dotnet --info # Useful when version mismatch between CI and local
+  - ps: nuget restore -verbosity quiet # Only nuget.exe knows both new (.NET Core) and old (Xamarin) projects
+build:
+  project: Adofai.sln
+  parallel: true
+  verbosity: minimal
+  publish_nuget: true
+after_build:
+  - ps: dotnet tool restore
+  - ps: dotnet format --dry-run --check
+  - ps: .\InspectCode.ps1
+on_success:
+  - ps: Invoke-RestMethod https://raw.githubusercontent.com/DiscordHooks/appveyor-discord-webhook/master/send.ps1 -o send.ps1
+  - ps: ./send.ps1 success $env:WEBHOOK_URL
+on_failure:
+  - ps: Invoke-RestMethod https://raw.githubusercontent.com/DiscordHooks/appveyor-discord-webhook/master/send.ps1 -o send.ps1
+  - ps: ./send.ps1 failure $env:WEBHOOK_URL
+test:
+  assemblies:
+    except:
+      - 'build\**\*'
