@@ -49,7 +49,7 @@ namespace cytos.Game.Graphics.UserInterface
                     Colour = whiteBox ? Color4.Black : Color4.White,
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
-                    Size = new Vector2(10),
+                    Scale = new Vector2(0.9f),
                 },
                 hover = new Box
                 {
