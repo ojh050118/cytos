@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.Build.Traversal">
+  <ItemGroup>
+    <ProjectReference Include="..\cytos.Desktop\cytos.Desktop.csproj" />
+    <ProjectReference Include="..\cytos.Game.Tests\cytos.Game.Tests.csproj" />
+    <ProjectReference Include="..\cytos.Game\cytos.Game.csproj" />
+  </ItemGroup>
+</Project>
