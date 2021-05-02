@@ -1,0 +1,8 @@
+
+*.p7s
+*.nupkg
+*.nuspec
+*.dll
+*.json
+*.pdb
+*.xml
