@@ -36,6 +36,7 @@ namespace cytos.Game.Graphics.UserInterface
             Action = action;
             Size = new Vector2(60, 20);
             CornerRadius = 3;
+            BorderThickness = 3;
             BorderColour = whiteBox ? Color4.White : Color4.Gray;
             Children = new Drawable[]
             {
