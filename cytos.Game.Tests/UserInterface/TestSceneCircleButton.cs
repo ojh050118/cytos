@@ -1,10 +1,9 @@
 ﻿using cytos.Game.Graphics.UserInterface;
-using osu.Framework.Allocation;
-using osu.Framework.Graphics.Sprites;
-using osu.Framework.Testing;
-using osu.Framework.Graphics;
-using osuTK;
 using cytos.Game.Tests.Visual;
+using osu.Framework.Allocation;
+using osu.Framework.Graphics;
+using osu.Framework.Graphics.Sprites;
+using osuTK;
 
 namespace cytos.Game.Tests.UserInterface
 {

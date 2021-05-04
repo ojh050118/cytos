@@ -22,3 +22,4 @@ build/inspectcode/_cytos.1466373549.00/FileDependencies/.version
 *.dat
 *.v2
 .vs/cytos/v16/.suo
+*.exe

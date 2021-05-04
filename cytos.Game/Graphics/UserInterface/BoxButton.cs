@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Effects;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input.Events;
@@ -36,6 +33,7 @@ namespace cytos.Game.Graphics.UserInterface
             Action = action;
             Size = new Vector2(60, 20);
             CornerRadius = 3;
+            BorderThickness = 3;
             BorderColour = whiteBox ? Color4.White : Color4.Gray;
             Children = new Drawable[]
             {
