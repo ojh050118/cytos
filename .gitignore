@@ -336,3 +336,4 @@ inspectcode
 /BenchmarkDotNet.Artifacts
 
 *.GeneratedMSBuildEditorConfig.editorconfig
+.vs/cytos/v16/.suo
