@@ -2,71 +2,64 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "tasks": [{
-            "label": "Build (Tests, Debug)",
+    "tasks": [
+        {
+            "label": "Build cytos (Debug)",
             "type": "shell",
             "command": "dotnet",
             "args": [
                 "build",
+                "cytos.Desktop",
                 "-p:GenerateFullPaths=true",
                 "-m",
-                "-verbosity:m",
-                "cytos.Game.Tests"
+                "-verbosity:m"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Build (Tests, Release)",
+            "label": "Build cytos (Release)",
             "type": "shell",
             "command": "dotnet",
             "args": [
                 "build",
+                "cytos.Desktop",
                 "-p:Configuration=Release",
                 "-p:GenerateFullPaths=true",
                 "-m",
-                "-verbosity:m",
-                "cytos.Game.Tests"
+                "-verbosity:m"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Build (Desktop, Debug)",
+            "label": "Build tests (Debug)",
             "type": "shell",
             "command": "dotnet",
             "args": [
                 "build",
+                "cytos.Game.Tests",
                 "-p:GenerateFullPaths=true",
                 "-m",
-                "-verbosity:m",
-                "cytos.Desktop"
+                "-verbosity:m"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
-        }, {
-            "label": "Build (Desktop, Release)",
+        },
+        {
+            "label": "Build tests (Release)",
             "type": "shell",
             "command": "dotnet",
             "args": [
                 "build",
+                "cytos.Game.Tests",
                 "-p:Configuration=Release",
                 "-p:GenerateFullPaths=true",
                 "-m",
-                "-verbosity:m",
-                "cytos.Desktop"
+                "-verbosity:m"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
-        }, {
-            "label": "Restore",
-            "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "restore",
-                "cytos.sln"
-            ],
-            "problemMatcher": []
         }
     ]
 }

@@ -1,57 +1,16 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [{
-            "name": "VisualTests (Debug)",
-            "type": "coreclr",
-            "request": "launch",
-            "program": "dotnet",
-            "args": [
-                "${workspaceRoot}/cytos.Game.Tests/bin/Debug/net5.0/cytos.Game.Tests.dll",
-            ],
-            "cwd": "${workspaceRoot}",
-            "preLaunchTask": "Build (Tests, Debug)",
-            "linux": {
-                "env": {
-                    "LD_LIBRARY_PATH": "${workspaceRoot}/cytos.Game.Tests/bin/Debug/net5.0:${env:LD_LIBRARY_PATH}"
-                }
-            },
-            "console": "internalConsole"
-        },
-        {
-            "name": "VisualTests (Release)",
-            "type": "coreclr",
-            "request": "launch",
-            "program": "dotnet",
-            "args": [
-                "${workspaceRoot}/cytos.Game.Tests/bin/Release/net5.0/cytos.Game.Tests.dll",
-            ],
-            "cwd": "${workspaceRoot}",
-            "preLaunchTask": "Build (Tests, Release)",
-            "linux": {
-                "env": {
-                    "LD_LIBRARY_PATH": "${workspaceRoot}/cytos.Game.Tests/bin/Release/net5.0:${env:LD_LIBRARY_PATH}"
-                }
-            },
-            "console": "internalConsole"
-        },
+    "configurations": [
         {
             "name": "cytos (Debug)",
             "type": "coreclr",
             "request": "launch",
             "program": "dotnet",
             "args": [
-                "${workspaceRoot}/cytos.Desktop/bin/Debug/net5.0/cytos.dll",
+                "${workspaceRoot}/cytos.Desktop/bin/Debug/net5.0/cytos.dll"
             ],
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": "Build (Desktop, Debug)",
-            "linux": {
-                "env": {
-                    "LD_LIBRARY_PATH": "${workspaceRoot}/cytos.Desktop/bin/Debug/net5.0:${env:LD_LIBRARY_PATH}"
-                }
-            },
+            "preLaunchTask": "Build cytos (Debug)",
             "console": "internalConsole"
         },
         {
@@ -60,15 +19,34 @@
             "request": "launch",
             "program": "dotnet",
             "args": [
-                "${workspaceRoot}/cytos.Desktop/bin/Debug/net5.0/cytos.dll",
+                "${workspaceRoot}/cytos.Desktop/bin/Release/net5.0/cytos.dll"
             ],
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": "Build (Desktop, Release)",
-            "linux": {
-                "env": {
-                    "LD_LIBRARY_PATH": "${workspaceRoot}/cytos.Desktop/bin/Debug/net5.0:${env:LD_LIBRARY_PATH}"
-                }
-            },
+            "preLaunchTask": "Build cytos (Release)",
+            "console": "internalConsole"
+        },
+        {
+            "name": "cytos (Tests, Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "dotnet",
+            "args": [
+                "${workspaceRoot}/cytos.Game.Tests/bin/Debug/net5.0/cytos.Game.Tests.dll"
+            ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": "Build tests (Debug)",
+            "console": "internalConsole"
+        },
+        {
+            "name": "cytos (Tests, Release)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "dotnet",
+            "args": [
+                "${workspaceRoot}/cytos.Game.Tests/bin/Release/net5.0/cytos.Game.Tests.dll"
+            ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": "Build tests (Release)",
             "console": "internalConsole"
         }
     ]
