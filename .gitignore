@@ -23,3 +23,16 @@ build/inspectcode/_cytos.1466373549.00/FileDependencies/.version
 *.v2
 .vs/cytos/v16/.suo
 *.exe
+cytos.Game\bin
+cytos.Game\obj
+cytos.Game.Tests\bin
+cytos.Game.Tests\obj
+cytos.Desktop\bin
+cytos.Desktop\obj
+cytos.iOS\bin
+cytos.iOS\obj
+cytos.Resources\bin
+cytos.Resources\obj
+build/
+.vs/
+
