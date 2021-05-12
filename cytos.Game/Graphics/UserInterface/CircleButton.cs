@@ -25,11 +25,13 @@ namespace cytos.Game.Graphics.UserInterface
         {
             Action = action;
             Size = new Vector2(30);
+            Anchor = Anchor.Centre;
         }
 
         [BackgroundDependencyLoader]
         private void load()
         {
+            Origin = Anchor.Centre;
             Masking = true;
             BorderThickness = 4;
             BorderColour = Color4.White;
@@ -55,7 +57,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         protected override bool OnMouseDown(MouseDownEvent e)
         {
-            this.ScaleTo(0.8f, 500, Easing.OutQuint);
+            this.ScaleTo(0.8f, 700, Easing.OutQuint);
 
             return base.OnMouseDown(e);
         }
@@ -64,7 +66,7 @@ namespace cytos.Game.Graphics.UserInterface
         {
             base.OnMouseUp(e);
 
-            this.ScaleTo(1, 500, Easing.OutElastic);
+            this.ScaleTo(1, 700, Easing.OutElastic);
         }
 
         protected override bool OnClick(ClickEvent e)

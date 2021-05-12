@@ -15,6 +15,7 @@ namespace cytos.Game.Tests.UserInterface
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre
             });
+            AddStep("", () => Show());
             AddStep("Show", () => overlay.Show());
             AddStep("Hide", () => overlay.Hide());
         }

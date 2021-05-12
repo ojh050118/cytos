@@ -1,25 +1,26 @@
 using cytos.Game.Graphics.Backgrounds;
 using cytos.Game.Graphics.UserInterface;
+using cytos.Game.Overlays;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Effects;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Input.Events;
 using osu.Framework.Screens;
+using osuTK;
+using osuTK.Input;
 
-namespace cytos.Game
+namespace cytos.Game.Screens
 {
-    public class MainScreen : Screen
+    public class MainScreen : CytosScreen
     {
         [BackgroundDependencyLoader]
         private void load()
         {
             InternalChildren = new Drawable[]
             {
-                new Background("Backgrounds/bg1")
-                {
-                    RelativeSizeAxes = Axes.Both,
-                },
-                new CytosTextFlowContainer(s => s.Font = FontUsage.Default.With(size: 40))
+                new CytosTextFlowContainer(s => s.Font = FontUsage.Default.With(size: 80))
                 {
                     Text = "C Y T O S",
                     Direction = FillDirection.Horizontal,
@@ -27,7 +28,13 @@ namespace cytos.Game
                     Origin = Anchor.BottomCentre,
                     Margin = new MarginPadding { Bottom = 100 },
                     AutoSizeAxes = Axes.Both
-                },
+                }.WithEffect(new GlowEffect
+                {
+                    BlurSigma = new Vector2(3f),
+                    Strength = 1.5f,
+                    Colour = Colour4.Aqua,
+                    PadExtent = true,
+                }),
                 new SpriteText
                 {
                     Anchor = Anchor.BottomCentre,
@@ -36,6 +43,17 @@ namespace cytos.Game
                     Text = "TOUCH SCREEN TO START"
                 }
             };
+        }
+
+        protected override void OnExit()
+        {
+        }
+
+        protected override bool OnClick(ClickEvent e)
+        {
+            this.Push(new SelectScreen());
+
+            return base.OnClick(e);
         }
     }
 }

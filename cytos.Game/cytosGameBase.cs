@@ -1,9 +1,14 @@
+using cytos.Game.Configuration;
+using cytos.Game.IO;
 using cytos.Resources;
 using osu.Framework.Allocation;
+using osu.Framework.Development;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Performance;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.IO.Stores;
+using osu.Framework.Platform;
 using osuTK;
 
 namespace cytos.Game
@@ -19,12 +24,18 @@ namespace cytos.Game
         protected override IReadOnlyDependencyContainer CreateChildDependencies(IReadOnlyDependencyContainer parent) =>
             dependencies = new DependencyContainer(base.CreateChildDependencies(parent));
 
+        public bool IsDevelopmentBuild { get; private set; }
+
+        protected Storage Storage { get; private set; }
+
+        protected CytosConfigManager LocalConfig;
+
         protected cytosGameBase()
         {
-            // Ensure game and tests scale with window size and screen DPI.
+            IsDevelopmentBuild = DebugUtils.IsDebugBuild;
+
             base.Content.Add(Content = new DrawSizePreservingFillContainer
             {
-                // You may want to change TargetDrawSize to your "default" resolution, which will decide how things scale and position when using absolute coordinates.
                 TargetDrawSize = new Vector2(1366, 768)
             });
         }
@@ -33,10 +44,42 @@ namespace cytos.Game
         private void load()
         {
             Resources.AddStore(new DllResourceStore(typeof(cytosResources).Assembly));
-            AddFont(Resources, @"Fonts/Electrolize");
             var largeStore = new LargeTextureStore(Host.CreateTextureLoaderStore(new NamespacedResourceStore<byte[]>(Resources, @"Textures")));
             largeStore.AddStore(Host.CreateTextureLoaderStore(new OnlineStore()));
+
+            AddFont(Resources, @"Fonts/Electrolize");
+
+            var files = Storage.GetStorageForDirectory("files");
+
+            dependencies.CacheAs(new BackgroundImageStore(Scheduler, files));
             dependencies.Cache(largeStore);
+            dependencies.CacheAs(this);
+            dependencies.CacheAs(LocalConfig);
+        }
+
+        protected override void LoadComplete()
+        {
+            base.LoadComplete();
+
+            var fpsDisplayBindable = LocalConfig.GetBindable<bool>(CytosSetting.FpsOverlay);
+            fpsDisplayBindable.ValueChanged += val => { FrameStatistics.Value = val.NewValue ? FrameStatisticsMode.Minimal : FrameStatisticsMode.None; };
+            fpsDisplayBindable.TriggerChange();
+
+            FrameStatistics.ValueChanged += e => fpsDisplayBindable.Value = e.NewValue != FrameStatisticsMode.None;
+        }
+
+        public override void SetHost(GameHost host)
+        {
+            base.SetHost(host);
+
+            Storage ??= host.Storage;
+            LocalConfig ??= new CytosConfigManager(Storage);
+        }
+
+        protected override void Dispose(bool isDisposing)
+        {
+            base.Dispose(isDisposing);
+            LocalConfig?.Dispose();
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
+using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input.Events;
+using osuTK;
 using osuTK.Graphics;
 using osuTK.Input;
 
@@ -9,102 +11,35 @@ namespace cytos.Game.Graphics.UserInterface
 {
     public class CytosOverlay : OverlayContainer
     {
-        protected override bool BlockPositionalInput => State.Value == Visibility.Visible;
+        protected override bool BlockNonPositionalInput => State.Value == Visibility.Visible;
+
         protected override bool StartHidden => true;
 
-        protected virtual string MainText { get; set; }
-        protected virtual string DescribeText { get; set; }
-        private Container contents;
+        protected virtual float Dim => 0.5f;
 
-        private OverlayHeader top;
-        private OverlayHeader bottom;
+        private readonly Box bg;
 
         public CytosOverlay()
         {
-            //RelativeSizeAxes = Axes.Y;
-            AutoSizeAxes = Axes.Y;
-            Width = 400;
-            Child = new FillFlowContainer
+            RelativeSizeAxes = Axes.Both;
+            AddRange(new Drawable[]
             {
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                Direction = FillDirection.Vertical,
-                RelativeSizeAxes = Axes.X,
-                AutoSizeAxes = Axes.Y,
-                Children = new Drawable[]
+                bg = new Box
                 {
-                    top = new OverlayHeader(),
-                    contents = new Container
-                    {
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        RelativeSizeAxes = Axes.X,
-                        Height = 500,
-                        Children = new Drawable[]
-                        {
-                            new Box
-                            {
-                                Colour = new Color4(255, 255, 255, 30),
-                                Anchor = Anchor.Centre,
-                                Origin = Anchor.Centre,
-                                RelativeSizeAxes = Axes.Both,
-                            },
-                            new Box
-                            {
-                                Colour = Color4.Black,
-                                Anchor = Anchor.TopCentre,
-                                Origin = Anchor.TopCentre,
-                                RelativeSizeAxes = Axes.X,
-                                Height = 120
-                            }
-                        }
-                    },
-                    bottom = new OverlayHeader()
+                    RelativeSizeAxes = Axes.Both,
+                    Colour = Color4.Black
                 }
-            };
+            });
         }
 
         protected override void PopIn()
         {
-            contents.ClearTransforms(true);
-            top.ClearTransforms(true);
-            bottom.ClearTransforms(true);
-            contents.ResizeWidthTo(1, 500, Easing.OutQuint);
-            if (!top.Expansion)
-            {
-                top.ToggleExpansion();
-                bottom.ToggleExpansion();
-            }
-
-            top.FadeIn(300, Easing.OutQuint);
-            bottom.FadeIn(300, Easing.OutQuint);
-            Scheduler.AddDelayed(() =>
-            {
-                contents.ResizeHeightTo(500, 500, Easing.OutQuint);
-            }, 300);
+            bg.FadeTo(Dim, 200, Easing.Out);
         }
 
         protected override void PopOut()
         {
-            contents.ClearTransforms(true);
-            top.ClearTransforms(true);
-            bottom.ClearTransforms(true);
-            contents.ResizeHeightTo(0, 500, Easing.OutQuint);
-            Scheduler.AddDelayed(() =>
-            {
-                contents.ResizeWidthTo(0, 500, Easing.OutQuint);
-                if (top.Expansion)
-                {
-                    top.ToggleExpansion();
-                    bottom.ToggleExpansion();
-                }
-
-                Scheduler.AddDelayed(() =>
-                {
-                    top.FadeOut(300, Easing.OutQuint);
-                    bottom.FadeOut(300, Easing.OutQuint);
-                }, 300);
-            }, 300);
+            bg.FadeOut(200, Easing.Out);
         }
 
         protected override bool OnKeyDown(KeyDownEvent e)

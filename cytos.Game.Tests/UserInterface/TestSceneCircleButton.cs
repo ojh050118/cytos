@@ -9,12 +9,10 @@ namespace cytos.Game.Tests.UserInterface
 {
     public class TestSceneCircleButton : cytosTestScene
     {
-        private CircleButton button;
-
         [BackgroundDependencyLoader]
         private void load()
         {
-            Add(button = new CircleButton
+            Add(new CircleButton
             {
                 Icon = FontAwesome.Solid.List,
                 Anchor = Anchor.Centre,
