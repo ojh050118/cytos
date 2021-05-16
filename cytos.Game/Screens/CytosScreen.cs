@@ -1,6 +1,7 @@
 ﻿using osu.Framework.Graphics;
 using osu.Framework.Input.Events;
 using osu.Framework.Screens;
+using osuTK;
 using osuTK.Input;
 
 namespace cytos.Game.Screens
@@ -31,6 +32,8 @@ namespace cytos.Game.Screens
         public override void OnEntering(IScreen last)
         {
             base.OnEntering(last);
+            Scale = new Vector2(1.1f);
+            this.ScaleTo(1, 200, Easing.Out);
             this.FadeInFromZero(200, Easing.Out);
         }
 
@@ -44,7 +47,7 @@ namespace cytos.Game.Screens
         public override void OnSuspending(IScreen next)
         {
             base.OnSuspending(next);
-            this.ScaleTo(1.1f, 200, Easing.Out);
+            this.ScaleTo(0.9f, 200, Easing.Out);
             this.FadeOut(200, Easing.Out);
         }
 
@@ -52,6 +55,7 @@ namespace cytos.Game.Screens
         {
             base.OnResuming(last);
 
+            Scale = new Vector2(1.1f);
             this.ScaleTo(1, 200, Easing.Out);
             this.FadeIn(200, Easing.Out);
         }

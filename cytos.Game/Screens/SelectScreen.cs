@@ -1,4 +1,5 @@
 ﻿using cytos.Game.Graphics.UserInterface;
+using cytos.Game.Screens.Edit;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
@@ -117,7 +118,7 @@ namespace cytos.Game.Screens
                         Size = new Vector2(30)
                     }
                 },
-                //Action = this.Push(new SetupScreen())
+                Action = () => this.Push(new EditorScreen())
             });
         }
     }
