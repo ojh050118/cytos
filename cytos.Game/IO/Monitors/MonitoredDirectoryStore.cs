@@ -102,7 +102,6 @@ namespace cytos.Game.IO.Monitors
             while (true)
             {
                 attempts++;
-                bool wait;
 
                 try
                 {
@@ -124,7 +123,6 @@ namespace cytos.Game.IO.Monitors
                     else
                     {
                         Logger.Log($"Failed to load {path}. Attempts: {attempts} / {retry_limit}.");
-                        wait = true;
                     }
                 }
 
