@@ -112,7 +112,6 @@ namespace cytos.Game.IO.Monitors
                     if (toLoad != null)
                         Add(filename, toLoad);
 
-                    wait = false;
                     break;
                 }
                 catch
@@ -129,8 +128,7 @@ namespace cytos.Game.IO.Monitors
                     }
                 }
 
-                if (wait)
-                    Thread.Sleep(250);
+                Thread.Sleep(250);
             }
         }
 

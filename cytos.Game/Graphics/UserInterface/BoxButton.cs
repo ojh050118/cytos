@@ -12,16 +12,13 @@ namespace cytos.Game.Graphics.UserInterface
 {
     public class BoxButton : ClickableContainer
     {
-        private Box hover;
-        private SpriteText sprite;
+        private readonly Box hover;
+        private readonly SpriteText sprite;
 
         public string Text
         {
-            get =>sprite.Text.ToString();
-            set
-            {
-                sprite.Text = value;
-            }
+            get => sprite.Text.ToString();
+            set => sprite.Text = value;
         }
 
         public BoxButton(Action action, bool whiteBox = false)

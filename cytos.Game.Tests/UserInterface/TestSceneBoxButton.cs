@@ -8,7 +8,7 @@ namespace cytos.Game.Tests.UserInterface
     {
         public TestSceneBoxButton()
         {
-            Add(new BoxButton(() => Hide())
+            Add(new BoxButton(Hide)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,

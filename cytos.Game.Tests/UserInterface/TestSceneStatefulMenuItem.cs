@@ -10,11 +10,9 @@ namespace cytos.Game.Tests.UserInterface
     {
         public TestSceneStatefulMenuItem()
         {
-            CytosMenu menu = null;
-
             AddStep("create menu", () =>
             {
-                Child = menu = new CytosMenu(Direction.Vertical, true)
+                Child = new CytosMenu(Direction.Vertical, true)
                 {
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,

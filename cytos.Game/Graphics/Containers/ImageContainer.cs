@@ -11,7 +11,7 @@ namespace cytos.Game.Graphics.Containers
 {
     public class ImageContainer : ClickableContainer
     {
-        public string Texture_Name { get; }
+        public string TextureName { get; }
 
         public static int Radius = 10;
 
@@ -19,7 +19,7 @@ namespace cytos.Game.Graphics.Containers
 
         public ImageContainer(string name, Action action = null)
         {
-            Texture_Name = name;
+            TextureName = name;
             this.action = action;
         }
 
@@ -47,7 +47,7 @@ namespace cytos.Game.Graphics.Containers
                         {
                             Anchor = Anchor.Centre,
                             Origin = Anchor.Centre,
-                            Texture = imageStore.Get(Texture_Name),
+                            Texture = imageStore.Get(TextureName),
                         },
                         new Box
                         {

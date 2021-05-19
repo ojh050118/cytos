@@ -13,9 +13,7 @@ namespace cytos.Game.Screens
 {
     public class SelectScreen : CytosScreen
     {
-        private Box box;
         private FillFlowContainer beatmaps;
-        private ClickableContainer add;
         private const float button_size = 50;
 
         [BackgroundDependencyLoader]
@@ -23,7 +21,8 @@ namespace cytos.Game.Screens
         {
             InternalChildren = new Drawable[]
             {
-                box = new Box
+                // Todo: 나중에 사용함.
+                new Box
                 {
                     Colour = new Color4(30, 30, 30, 255),
                     RelativeSizeAxes = Axes.Both,
@@ -92,7 +91,7 @@ namespace cytos.Game.Screens
         {
             base.LoadComplete();
 
-            beatmaps.Add(add = new ClickableContainer
+            beatmaps.Add(new ClickableContainer
             {
                 Masking = true,
                 CornerRadius = 10,

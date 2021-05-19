@@ -10,7 +10,7 @@ namespace cytos.Game.IO
 {
     public class TrackStore : IResourceStore<byte[]>
     {
-        private Storage storage;
+        private readonly Storage storage;
 
         public TrackStore(Storage storage)
         {
@@ -29,7 +29,6 @@ namespace cytos.Game.IO
         }
 
         public Stream GetStream(string name) => File.OpenRead($"{storage.GetFullPath(string.Empty)}/{name}.mp3");
-
 
         public Task<byte[]> GetAsync(string name) => null;
 

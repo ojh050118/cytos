@@ -10,7 +10,6 @@ namespace cytos.Game.Tests.UserInterface
         [SetUp]
         public void Setup() => Schedule(() =>
         {
-
             Child = new CytosMenu(Direction.Vertical, true)
             {
                 Anchor = Anchor.Centre,

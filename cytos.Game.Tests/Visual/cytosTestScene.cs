@@ -4,9 +4,9 @@ namespace cytos.Game.Tests.Visual
 {
     public class CytosTestScene : TestScene
     {
-        protected override ITestSceneTestRunner CreateRunner() => new cytosTestSceneTestRunner();
+        protected override ITestSceneTestRunner CreateRunner() => new CytosTestSceneTestRunner();
 
-        private class cytosTestSceneTestRunner : CytosGameBase, ITestSceneTestRunner
+        private class CytosTestSceneTestRunner : CytosGameBase, ITestSceneTestRunner
         {
             private TestSceneTestRunner.TestRunner runner;
 

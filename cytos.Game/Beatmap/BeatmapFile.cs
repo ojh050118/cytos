@@ -41,7 +41,7 @@ namespace cytos.Game.Beatmap
 
             using (StreamWriter sw = File.CreateText($"beatmaps/{name}"))
             {
-                sw.WriteLine(jsonResult.ToString());
+                sw.WriteLine(jsonResult);
                 sw.Close();
             }
         }

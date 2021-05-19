@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using cytos.Game.Graphics.UserInterface;
+﻿using cytos.Game.Graphics.UserInterface;
 using cytos.Game.Screens.Edit;
 using cytos.Game.Tests.Visual;
 using osu.Framework.Graphics;

@@ -57,7 +57,7 @@ namespace cytos.Game.Overlays
                             currentWindow.ForceDecline();
                             return true;
                     }
-                };
+                }
             }
 
             return base.OnKeyDown(e);

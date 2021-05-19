@@ -24,7 +24,7 @@ namespace cytos.Game.Screens
                         OnExit();
                         return true;
                 }
-            };
+            }
 
             return base.OnKeyDown(e);
         }

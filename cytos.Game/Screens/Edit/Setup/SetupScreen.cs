@@ -14,7 +14,7 @@ namespace cytos.Game.Screens.Edit.Setup
     public class SetupScreen : Screen
     {
         /// <summary>
-        /// background, track, artist, title, start BPM 
+        /// background, track, artist, title, start BPM
         /// </summary>
         public static LabelledTextBox[] TextBoxes = new LabelledTextBox[5];
 

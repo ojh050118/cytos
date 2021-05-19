@@ -3,7 +3,7 @@ using osu.Framework.Platform;
 
 namespace cytos.Game.Tests.Visual
 {
-    public class TestScenecytosGame : CytosTestScene
+    public class TestSceneCytosGame : CytosTestScene
     {
         private CytosGame game;
 

@@ -78,8 +78,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         protected override bool OnClick(ClickEvent e)
         {
-            if (Action is not null)
-                Action.Invoke();
+            Action?.Invoke();
 
             return base.OnClick(e);
         }
