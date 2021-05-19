@@ -12,7 +12,6 @@ namespace cytos.Game.Graphics.UserInterface
 {
     public class BoxButton : ClickableContainer
     {
-        private string text;
         private Box hover;
         private SpriteText sprite;
 
@@ -20,19 +19,20 @@ namespace cytos.Game.Graphics.UserInterface
         {
             get
             {
-                return text;
+                return sprite.Text.ToString();
             }
             set
             {
-                text = value;
+                sprite.Text = value;
             }
         }
 
         public BoxButton(Action action, bool whiteBox = false)
         {
             Action = action;
-            Size = new Vector2(60, 20);
-            CornerRadius = 3;
+            Height = 50;
+            RelativeSizeAxes = Axes.X;
+            CornerRadius = 5;
             BorderThickness = 3;
             BorderColour = whiteBox ? Color4.White : Color4.Gray;
             Children = new Drawable[]
@@ -48,6 +48,7 @@ namespace cytos.Game.Graphics.UserInterface
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
                     Scale = new Vector2(0.9f),
+                    Font = FontUsage.Default.With(size: 30)
                 },
                 hover = new Box
                 {
@@ -56,15 +57,12 @@ namespace cytos.Game.Graphics.UserInterface
                     RelativeSizeAxes = Axes.Both
                 }
             };
-
-            Action.Invoke();
         }
 
         [BackgroundDependencyLoader]
         private void load()
         {
             Masking = true;
-            sprite.Text = text;
         }
 
 

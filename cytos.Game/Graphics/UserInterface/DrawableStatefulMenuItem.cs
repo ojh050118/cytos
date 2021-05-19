@@ -53,7 +53,6 @@ namespace cytos.Game.Graphics.UserInterface
             {
                 base.Update();
 
-                // Todo: This is bad. This can maybe be done better with a refactor of DrawableOsuMenuItem.
                 stateIcon.X = BoldText.DrawWidth + 10;
             }
 

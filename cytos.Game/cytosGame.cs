@@ -10,7 +10,6 @@ namespace cytos.Game
 {
     public class cytosGame : cytosGameBase
     {
-        private ScreenStack screenStack;
         private DependencyContainer dependencies;
 
         protected override IReadOnlyDependencyContainer CreateChildDependencies(IReadOnlyDependencyContainer parent) =>
@@ -19,12 +18,14 @@ namespace cytos.Game
         [BackgroundDependencyLoader]
         private void load()
         {
-            // Add your top-level game components here.
-            // A screen stack and sample screen has been provided for convenience, but you can replace it if you don't want to use screens.
-            //Child = screenStack = new ScreenStack { RelativeSizeAxes = Axes.Both };
-
             ScreenStack screens = new ScreenStack();
+
             var background = new Background("Backgrounds/bg1");
+            dependencies.Cache(background);
+
+            DialogOverlay dialog;
+            dependencies.Cache(dialog = new DialogOverlay());
+
             screens.Push(new MainScreen());
 
             Add(new Container
@@ -38,16 +39,10 @@ namespace cytos.Game
                     {
                         background,
                         screens,
+                        dialog
                     }
                 }
             });
-        }
-
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
-
-            //screenStack.Push(new MainScreen());
         }
     }
 }

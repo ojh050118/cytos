@@ -72,7 +72,7 @@ namespace cytos.Game.Graphics.UserInterface
             protected void FadeUnhovered()
             {
                 Bar.FadeTo(IsHovered ? 1 : 0, transition_length, Easing.OutQuint);
-                Text.FadeColour(IsHovered ? Color4.White : new Color4(60, 60, 60, 255), transition_length, Easing.OutQuint);
+                Text.FadeColour(IsHovered ? Color4.White : new Color4(100, 100, 100, 255), transition_length, Easing.OutQuint);
             }
 
             protected override bool OnHover(HoverEvent e)
@@ -102,7 +102,8 @@ namespace cytos.Game.Graphics.UserInterface
                         Origin = Anchor.BottomLeft,
                         Anchor = Anchor.BottomLeft,
                         Text = (value as IHasDescription)?.Description ?? (value as Enum)?.GetDescription() ?? value.ToString(),
-                        Font = FontUsage.Default.With(size: 14)
+                        Font = FontUsage.Default.With(size: 14),
+                        Colour = new Color4(100, 100, 100, 255)
                     },
                     Bar = new Box
                     {

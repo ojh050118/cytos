@@ -1,5 +1,6 @@
 ﻿using System;
 using cytos.Game.Graphics.UserInterface;
+using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -13,7 +14,7 @@ using osuTK.Input;
 
 namespace cytos.Game.Overlays
 {
-    public class ConfirmationOverlay : CytosOverlay
+    public class DialogOverlay : CytosOverlay
     {
         private ConfirmationWindow currentWindow;
 
@@ -71,8 +72,9 @@ namespace cytos.Game.Overlays
             private readonly Action decline;
 
             private readonly Box box;
-            private readonly SpriteText textContainer;
-            private readonly FillFlowContainer<BoxButton> buttonsContainer;
+            private readonly CytosTextFlowContainer textContainer;
+            private FillFlowContainer<BoxButton> buttonsContainer;
+            private FillFlowContainer content;
 
             public ConfirmationWindow(string text, Action onConfirm, Action onDecline)
             {
@@ -88,10 +90,10 @@ namespace cytos.Game.Overlays
                     animateHide();
                 };
 
-                Anchor = Anchor.Centre;
-                Origin = Anchor.Centre;
-                RelativeSizeAxes = Axes.X;
-                Height = 200;
+                Anchor = Anchor.BottomCentre;
+                Origin = Anchor.BottomCentre;
+                RelativeSizeAxes = Axes.Y;
+                Width = 600;
                 Masking = true;
                 Alpha = 0;
                 EdgeEffect = new EdgeEffectParameters
@@ -108,38 +110,56 @@ namespace cytos.Game.Overlays
                         Origin = Anchor.Centre,
                         RelativeSizeAxes = Axes.Both,
                         Colour = Color4.DarkGray.Opacity(0.4f),
-                        Size = new Vector2(0, 1)
                     },
-                    new Container
+                    new SpriteIcon
                     {
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
-                        AutoSizeAxes = Axes.X,
-                        RelativeSizeAxes = Axes.Y,
-                        Padding = new MarginPadding {Vertical = 30},
+                        Alpha = 0.1f,
+                        Colour = Color4.White,
+                        Icon = FontAwesome.Solid.ExclamationTriangle,
+                        Size = new Vector2(Width * 0.5f),
+                    },
+                    content = new FillFlowContainer
+                    {
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        RelativeSizeAxes = Axes.Both,
+                        Padding = new MarginPadding { Vertical = 30, Horizontal = 20 },
+                        Spacing = new Vector2(0, 20),
+                        Alpha = 0,
+                        Y = 200,
                         Children = new Drawable[]
                         {
-                            textContainer = new SpriteText
+                            textContainer = new CytosTextFlowContainer(s => s.Font = FontUsage.Default.With(size: 30))
                             {
-                                Anchor = Anchor.TopCentre,
-                                Origin = Anchor.TopCentre,
+                                Anchor = Anchor.Centre,
+                                Origin = Anchor.Centre,
+                                RelativeSizeAxes = Axes.X,
+                                AutoSizeAxes = Axes.Y,
                                 Text = text,
-                                Alpha = 0,
-                                Y = -content_offset,
                             },
                             buttonsContainer = new FillFlowContainer<BoxButton>
                             {
-                                Anchor = Anchor.BottomCentre,
-                                Origin = Anchor.BottomCentre,
-                                Direction = FillDirection.Horizontal,
-                                AutoSizeAxes = Axes.Both,
-                                Spacing = new Vector2(50, 0),
-                                Alpha = 0,
+                                Anchor = Anchor.Centre,
+                                Origin = Anchor.Centre,
+                                Direction = FillDirection.Vertical,
+                                RelativeSizeAxes = Axes.X,
+                                AutoSizeAxes = Axes.Y,
+                                Spacing = new Vector2(0, 5),
                                 Y = content_offset,
                                 Children = new[]
                                 {
-                                    new BoxButton(confirm, true),
+                                    new BoxButton(confirm, true)
+                                    {
+                                        Text = "YES",
+                                        RelativeSizeAxes = Axes.X
+                                    },
                                     new BoxButton(decline)
+                                    {
+                                        Text = "NO",
+                                        RelativeSizeAxes = Axes.X
+                                    }
                                 }
                             }
                         }
@@ -159,26 +179,16 @@ namespace cytos.Game.Overlays
 
             private void animateShow()
             {
-                box.ResizeWidthTo(1, 200, Easing.Out);
-
-                textContainer.FadeIn(200, Easing.Out);
-                textContainer.MoveToY(0, 200, Easing.Out);
-
-                buttonsContainer.FadeIn(200, Easing.Out);
-                buttonsContainer.MoveToY(0, 200, Easing.Out);
+                content.FadeIn(200, Easing.Out);
+                content.MoveToY(0, 300, Easing.OutQuint);
 
                 this.FadeIn(200, Easing.Out);
             }
 
             private void animateHide()
             {
-                box.ResizeWidthTo(0, 200, Easing.Out);
-
-                textContainer.FadeOut(200, Easing.Out);
-                textContainer.MoveToY(-content_offset, 200, Easing.Out);
-
-                buttonsContainer.FadeOut(200, Easing.Out);
-                buttonsContainer.MoveToY(content_offset, 200, Easing.Out);
+                content.FadeOut(200, Easing.Out);
+                content.MoveToY(200, 300, Easing.OutQuint);
 
                 this.FadeOut(200, Easing.Out).Expire();
             }

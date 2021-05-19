@@ -1,5 +1,6 @@
 ﻿using cytos.Game.Graphics.UserInterface;
 using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -13,8 +14,10 @@ namespace cytos.Game.Screens.Edit.Setup
 {
     public class SetupScreen : Screen
     {
-        // background, track, artist, title, start BPM 
-        private LabelledTextBox[] textBoxes = new LabelledTextBox[5];
+        /// <summary>
+        /// background, track, artist, title, start BPM 
+        /// </summary>
+        public static LabelledTextBox[] TextBoxes = new LabelledTextBox[5];
 
         [BackgroundDependencyLoader]
         private void load()
@@ -87,16 +90,15 @@ namespace cytos.Game.Screens.Edit.Setup
                                     {
                                         Text = "Resources"
                                     },
-                                    textBoxes[0] = new LabelledTextBox("Background"),
-                                    textBoxes[1] = new LabelledTextBox("Audio Track"),
+                                    TextBoxes[0] = new LabelledTextBox("Background"),
+                                    TextBoxes[1] = new LabelledTextBox("Audio Track"),
                                     new SpriteText
                                     {
                                         Text = "Metadata"
                                     },
-                                    textBoxes[2] = new LabelledTextBox("Artist"),
-                                    textBoxes[3] = new LabelledTextBox("Title"),
-                                    textBoxes[4] = new LabelledTextBox("Start BPM")
-
+                                    TextBoxes[2] = new LabelledTextBox("Artist"),
+                                    TextBoxes[3] = new LabelledTextBox("Title"),
+                                    TextBoxes[4] = new LabelledTextBox("Start BPM")
                                 }
                             }
                         },

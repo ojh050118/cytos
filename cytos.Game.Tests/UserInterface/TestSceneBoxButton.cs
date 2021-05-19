@@ -8,17 +8,13 @@ namespace cytos.Game.Tests.UserInterface
     {
         public TestSceneBoxButton()
         {
-            Add(new BoxButton(() => Show())
+            Add(new BoxButton(() => Hide())
             {
-                Anchor = Anchor.CentreLeft,
-                Origin = Anchor.CentreLeft,
-                Text = "Click me"
-            });
-            Add(new BoxButton(() => Show(), true)
-            {
-                Anchor = Anchor.CentreRight,
-                Origin = Anchor.CentreRight,
-                Text = "muyaho"
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Text = "Click me",
+                //RelativeSizeAxes = Axes.X,
+                //Padding = new MarginPadding { Horizontal = 100 }
             });
         }
     }

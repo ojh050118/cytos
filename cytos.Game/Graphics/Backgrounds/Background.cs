@@ -1,4 +1,5 @@
-﻿using osu.Framework.Allocation;
+﻿using cytos.Game.IO;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
@@ -15,11 +16,14 @@ namespace cytos.Game.Graphics.Backgrounds
 
         private readonly string textureName;
 
+        private bool useExternal;
+
         private BufferedContainer bufferedContainer;
 
-        public Background(string textureName = @"")
+        public Background(string textureName = @"", bool useExternalStore = false)
         {
             this.textureName = textureName;
+            useExternal = useExternalStore;
             RelativeSizeAxes = Axes.Both;
 
             AddInternal(Sprite = new Sprite
@@ -32,10 +36,15 @@ namespace cytos.Game.Graphics.Backgrounds
         }
 
         [BackgroundDependencyLoader]
-        private void load(LargeTextureStore textures)
+        private void load(LargeTextureStore textures, BackgroundImageStore imageStore)
         {
             if (!string.IsNullOrEmpty(textureName))
-                Sprite.Texture = textures.Get(textureName);
+            {
+                if (!useExternal)
+                    Sprite.Texture = textures.Get(textureName);
+                else
+                    Sprite.Texture = imageStore.Get(textureName);
+            }
         }
 
         public Vector2 BlurSigma => bufferedContainer?.BlurSigma / blur_scale ?? Vector2.Zero;

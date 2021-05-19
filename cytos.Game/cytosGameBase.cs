@@ -15,10 +15,6 @@ namespace cytos.Game
 {
     public class cytosGameBase : osu.Framework.Game
     {
-        // Anything in this class is shared between the test browser and the game implementation.
-        // It allows for caching global dependencies that should be accessible to tests, or changing
-        // the screen scaling for all components including the test browser and framework overlays.
-
         protected override Container<Drawable> Content { get; }
         private DependencyContainer dependencies;
         protected override IReadOnlyDependencyContainer CreateChildDependencies(IReadOnlyDependencyContainer parent) =>
@@ -29,6 +25,8 @@ namespace cytos.Game
         protected Storage Storage { get; private set; }
 
         protected CytosConfigManager LocalConfig;
+
+        private BeatmapAudioManager beatmapAudioManager;
 
         protected cytosGameBase()
         {
@@ -50,11 +48,17 @@ namespace cytos.Game
             AddFont(Resources, @"Fonts/Electrolize");
 
             var files = Storage.GetStorageForDirectory("files");
+            var tracks = new ResourceStore<byte[]>();
+            tracks.AddStore(new TrackStore(files));
+            beatmapAudioManager = new BeatmapAudioManager(Host.AudioThread, tracks, new ResourceStore<byte[]>()) { EventScheduler = Scheduler };
 
+            dependencies.Cache(beatmapAudioManager);
             dependencies.CacheAs(new BackgroundImageStore(Scheduler, files));
             dependencies.Cache(largeStore);
             dependencies.CacheAs(this);
             dependencies.CacheAs(LocalConfig);
+
+            Host.Window.Title = "cytos";
         }
 
         protected override void LoadComplete()

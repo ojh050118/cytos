@@ -1,4 +1,5 @@
 ﻿using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -13,7 +14,11 @@ namespace cytos.Game.Graphics.UserInterface
     {
         private const float corner_radius = 20;
 
-        private string text;
+        private string text { get; init; }
+
+        private CytosTextBox textBox;
+
+        public Bindable<string> Current = new Bindable<string>("");
 
         public LabelledTextBox(string text)
         {
@@ -41,15 +46,19 @@ namespace cytos.Game.Graphics.UserInterface
                     Origin = Anchor.CentreLeft,
                     Margin = new MarginPadding { Left = 20 }
                 },
-                new CytosTextBox
+                textBox = new CytosTextBox
                 {
                     Anchor = Anchor.CentreRight,
                     Origin = Anchor.CentreRight,
                     RelativeSizeAxes = Axes.X,
                     Width = 0.8f,
                     Height = 50,
-                    CornerRadius = corner_radius
+                    CornerRadius = corner_radius,
                 }
+            };
+            textBox.Current.ValueChanged += value =>
+            {
+                Current.Value = value.NewValue;
             };
         }
     }
