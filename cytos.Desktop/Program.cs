@@ -9,7 +9,7 @@ namespace cytos.Desktop
         public static void Main()
         {
             using (GameHost host = Host.GetSuitableHost(@"cytos"))
-            using (osu.Framework.Game game = new cytosGame())
+            using (osu.Framework.Game game = new CytosGame())
                 host.Run(game);
         }
     }
