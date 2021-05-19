@@ -40,10 +40,7 @@ namespace cytos.Game.Graphics.Backgrounds
         {
             if (!string.IsNullOrEmpty(textureName))
             {
-                if (!useExternal)
-                    Sprite.Texture = textures?.Get(textureName);
-                else
-                    Sprite.Texture = imageStore?.Get(textureName);
+                Sprite.Texture = !useExternal ? textures?.Get(textureName) : imageStore?.Get(textureName);
             }
         }
 

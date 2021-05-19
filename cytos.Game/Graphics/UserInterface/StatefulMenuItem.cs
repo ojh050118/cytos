@@ -29,7 +29,7 @@ namespace cytos.Game.Graphics.UserInterface
     public abstract class StatefulMenuItem<T> : StatefulMenuItem
         where T : struct
     {
-        public new readonly Bindable<T> State = new Bindable<T>();
+        public new readonly Bindable<T> State = new();
 
         protected StatefulMenuItem(string text, Func<T, T> changeStateFunc, MenuItemType type = MenuItemType.Standard)
             : this(text, changeStateFunc, type, null)

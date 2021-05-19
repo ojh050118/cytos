@@ -13,7 +13,7 @@ namespace cytos.Game.Graphics.UserInterface
         {
         }
 
-        protected override SpriteText CreateSpriteText() => new SpriteText();
+        protected override SpriteText CreateSpriteText() => new();
 
         public void AddArbitraryDrawable(Drawable drawable) => AddInternal(drawable);
 

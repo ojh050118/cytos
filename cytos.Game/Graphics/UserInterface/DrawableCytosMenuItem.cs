@@ -84,7 +84,7 @@ namespace cytos.Game.Graphics.UserInterface
         }
 
         protected sealed override Drawable CreateContent() => text = CreateTextContainer();
-        protected virtual TextContainer CreateTextContainer() => new TextContainer();
+        protected virtual TextContainer CreateTextContainer() => new();
 
         protected class TextContainer : Container, IHasText
         {
