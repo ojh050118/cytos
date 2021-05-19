@@ -1,6 +1,6 @@
-﻿using osu.Framework.Platform;
+﻿using cytos.Game;
 using osu.Framework;
-using cytos.Game;
+using osu.Framework.Platform;
 
 namespace cytos.Desktop
 {

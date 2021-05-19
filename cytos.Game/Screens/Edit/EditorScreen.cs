@@ -1,11 +1,9 @@
 ﻿using System;
-using cytos.Game.Graphics.Backgrounds;
 using cytos.Game.Graphics.UserInterface;
 using cytos.Game.IO;
 using cytos.Game.Overlays;
 using cytos.Game.Screens.Edit.Setup;
 using osu.Framework.Allocation;
-using osu.Framework.Audio;
 using osu.Framework.Audio.Track;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Audio;

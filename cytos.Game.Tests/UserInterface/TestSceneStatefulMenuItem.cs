@@ -1,8 +1,6 @@
 ﻿using System;
 using cytos.Game.Graphics.UserInterface;
 using cytos.Game.Tests.Visual;
-using NUnit.Framework;
-using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 

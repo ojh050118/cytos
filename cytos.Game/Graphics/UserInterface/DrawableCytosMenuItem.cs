@@ -13,7 +13,7 @@ namespace cytos.Game.Graphics.UserInterface
 {
     public class DrawableCytosMenuItem : Menu.DrawableMenuItem
     {
-public const int MARGIN_HORIZONTAL = 17;
+        public const int MARGIN_HORIZONTAL = 17;
         public const int MARGIN_VERTICAL = 4;
         private const int text_size = 17;
         private const int transition_length = 80;

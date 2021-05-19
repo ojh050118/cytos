@@ -4,7 +4,6 @@ using cytos.Game.Screens.Edit;
 using cytos.Game.Tests.Visual;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
-using osu.Framework.Screens;
 using osuTK;
 
 namespace cytos.Game.Tests.UserInterface

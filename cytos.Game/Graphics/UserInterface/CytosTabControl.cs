@@ -31,7 +31,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         public CytosTabControl()
         {
-            TabContainer.Spacing = new Vector2(SPACING , 0);
+            TabContainer.Spacing = new Vector2(SPACING, 0);
 
             AddInternal(strip = new Box
             {

@@ -1,6 +1,4 @@
-using cytos.Game.Graphics.Backgrounds;
 using cytos.Game.Graphics.UserInterface;
-using cytos.Game.Overlays;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -9,7 +7,6 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input.Events;
 using osu.Framework.Screens;
 using osuTK;
-using osuTK.Input;
 
 namespace cytos.Game.Screens
 {

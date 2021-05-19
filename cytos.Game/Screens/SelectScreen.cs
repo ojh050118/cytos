@@ -1,17 +1,13 @@
 ﻿using cytos.Game.Graphics.UserInterface;
 using cytos.Game.Screens.Edit;
 using osu.Framework.Allocation;
-using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
-using osu.Framework.Input.Events;
 using osu.Framework.Screens;
 using osuTK;
 using osuTK.Graphics;
-using osuTK.Input;
-using System;
 
 namespace cytos.Game.Screens
 {

@@ -2,8 +2,6 @@
 using cytos.Game.Tests.Visual;
 using NUnit.Framework;
 using osu.Framework.Graphics;
-using osu.Framework.Input;
-using osuTK.Input;
 
 namespace cytos.Game.Tests.UserInterface
 {
