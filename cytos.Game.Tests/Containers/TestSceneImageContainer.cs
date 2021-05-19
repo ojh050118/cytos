@@ -5,7 +5,7 @@ using osuTK;
 
 namespace cytos.Game.Tests.Containers
 {
-    public class TestSceneImageContainer : cytosTestScene
+    public class TestSceneImageContainer : CytosTestScene
     {
         public TestSceneImageContainer()
         {

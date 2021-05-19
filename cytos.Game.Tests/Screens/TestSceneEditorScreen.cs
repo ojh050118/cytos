@@ -4,7 +4,7 @@ using osu.Framework.Screens;
 
 namespace cytos.Game.Tests.Screens
 {
-    public class TestSceneEditorScreen : cytosTestScene
+    public class TestSceneEditorScreen : CytosTestScene
     {
         public TestSceneEditorScreen()
         {

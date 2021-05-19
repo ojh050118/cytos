@@ -7,7 +7,7 @@ using osuTK;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    public class TestSceneCircleButton : cytosTestScene
+    public class TestSceneCircleButton : CytosTestScene
     {
         [BackgroundDependencyLoader]
         private void load()

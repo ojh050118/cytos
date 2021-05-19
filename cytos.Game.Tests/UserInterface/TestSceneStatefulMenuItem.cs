@@ -6,7 +6,7 @@ using osu.Framework.Graphics.Sprites;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    public class TestSceneStatefulMenuItem : cytosTestScene
+    public class TestSceneStatefulMenuItem : CytosTestScene
     {
         public TestSceneStatefulMenuItem()
         {

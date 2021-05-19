@@ -8,7 +8,7 @@ using osuTK;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    public class TestSceneTabControl : cytosTestScene
+    public class TestSceneTabControl : CytosTestScene
     {
         public TestSceneTabControl()
         {

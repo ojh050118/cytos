@@ -5,7 +5,7 @@ using osu.Framework.Graphics;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    public class TestSceneCytosMenu : cytosTestScene
+    public class TestSceneCytosMenu : CytosTestScene
     {
         [SetUp]
         public void Setup() => Schedule(() =>

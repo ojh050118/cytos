@@ -4,7 +4,7 @@ using osu.Framework.Graphics;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    public class TestSceneBoxButton : cytosTestScene
+    public class TestSceneBoxButton : CytosTestScene
     {
         public TestSceneBoxButton()
         {
@@ -13,8 +13,6 @@ namespace cytos.Game.Tests.UserInterface
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 Text = "Click me",
-                //RelativeSizeAxes = Axes.X,
-                //Padding = new MarginPadding { Horizontal = 100 }
             });
         }
     }

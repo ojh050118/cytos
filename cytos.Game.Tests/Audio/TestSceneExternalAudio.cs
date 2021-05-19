@@ -5,7 +5,7 @@ using osu.Framework.Audio.Track;
 
 namespace cytos.Game.Tests.Audio
 {
-    public class TestSceneExternalAudio : cytosTestScene
+    public class TestSceneExternalAudio : CytosTestScene
     {
         private Track track;
 

@@ -4,7 +4,7 @@ using osu.Framework.Graphics;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    public class TestSceneLabelledTextBox : cytosTestScene
+    public class TestSceneLabelledTextBox : CytosTestScene
     {
         public TestSceneLabelledTextBox()
         {

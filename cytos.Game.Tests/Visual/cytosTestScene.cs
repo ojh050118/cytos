@@ -2,7 +2,7 @@ using osu.Framework.Testing;
 
 namespace cytos.Game.Tests.Visual
 {
-    public class cytosTestScene : TestScene
+    public class CytosTestScene : TestScene
     {
         protected override ITestSceneTestRunner CreateRunner() => new cytosTestSceneTestRunner();
 

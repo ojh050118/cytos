@@ -5,7 +5,7 @@ using osu.Framework.Graphics;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    public class TestSceneLoadingSpinner : cytosTestScene
+    public class TestSceneLoadingSpinner : CytosTestScene
     {
         private LoadingSpinner loading;
 
