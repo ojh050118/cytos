@@ -1,12 +1,14 @@
 ﻿using cytos.Game.Graphics.UserInterface;
 using cytos.Game.Tests.Visual;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 
 namespace cytos.Game.Tests.UserInterface
 {
     public class TestSceneBoxButton : CytosTestScene
     {
-        public TestSceneBoxButton()
+        [BackgroundDependencyLoader]
+        private void load()
         {
             Add(new BoxButton(null)
             {
