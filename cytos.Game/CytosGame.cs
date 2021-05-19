@@ -26,6 +26,8 @@ namespace cytos.Game
             DialogOverlay dialog;
             dependencies.Cache(dialog = new DialogOverlay());
 
+            dependencies.CacheAs(this);
+
             screens.Push(new MainScreen());
 
             Add(new Container
