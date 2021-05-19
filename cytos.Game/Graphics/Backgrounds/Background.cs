@@ -16,7 +16,7 @@ namespace cytos.Game.Graphics.Backgrounds
 
         private readonly string textureName;
 
-        private bool useExternal;
+        private readonly bool useExternal;
 
         private BufferedContainer bufferedContainer;
 

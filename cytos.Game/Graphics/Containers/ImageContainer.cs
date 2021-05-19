@@ -15,7 +15,7 @@ namespace cytos.Game.Graphics.Containers
 
         public static int Radius = 10;
 
-        private Action action;
+        private readonly Action action;
 
         public ImageContainer(string name, Action action = null)
         {

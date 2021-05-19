@@ -8,7 +8,7 @@ using osu.Framework.Screens;
 
 namespace cytos.Game
 {
-    public class cytosGame : cytosGameBase
+    public class CytosGame : CytosGameBase
     {
         private DependencyContainer dependencies;
 

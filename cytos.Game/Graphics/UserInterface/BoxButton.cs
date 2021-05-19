@@ -17,10 +17,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         public string Text
         {
-            get
-            {
-                return sprite.Text.ToString();
-            }
+            get =>sprite.Text.ToString();
             set
             {
                 sprite.Text = value;
@@ -64,7 +61,6 @@ namespace cytos.Game.Graphics.UserInterface
         {
             Masking = true;
         }
-
 
         protected override bool OnHover(HoverEvent e)
         {

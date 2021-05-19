@@ -8,13 +8,12 @@ using osuTK;
 
 namespace cytos.Game.Tests.UserInterface
 {
-    [Description("Warning! this is not fully implemented")]
     public class TestSceneTabControl : cytosTestScene
     {
-        private SpriteText text;
-
         public TestSceneTabControl()
         {
+            SpriteText text;
+
             CytosTabControl<EditMode> tabControl;
 
             Add(tabControl = new CytosTabControl<EditMode>

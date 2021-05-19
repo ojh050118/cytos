@@ -20,7 +20,7 @@ namespace cytos.Game.Screens.Edit
     public class EditorScreen : CytosScreen
     {
         private Container screenContainer;
-        private Action addScreen;
+        private readonly Action addScreen;
         private CytosTabControl<EditMode> tabControl;
         private CytosTabControl<Speed> playback;
         private DrawableTrack track;
@@ -79,7 +79,6 @@ namespace cytos.Game.Screens.Edit
                                 AutoSort = true
                             }
                         }
-
                     }
                 },
                 new Container

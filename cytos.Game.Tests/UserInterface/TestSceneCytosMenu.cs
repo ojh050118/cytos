@@ -7,15 +7,11 @@ namespace cytos.Game.Tests.UserInterface
 {
     public class TestSceneCytosMenu : cytosTestScene
     {
-        private CytosMenu menu;
-        private bool actionPerformed;
-
         [SetUp]
         public void Setup() => Schedule(() =>
         {
-            actionPerformed = false;
 
-            Child = menu = new CytosMenu(Direction.Vertical, true)
+            Child = new CytosMenu(Direction.Vertical, true)
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
@@ -28,6 +24,6 @@ namespace cytos.Game.Tests.UserInterface
             };
         });
 
-        private void performAction() => actionPerformed = true;
+        private void performAction() => Show();
     }
 }

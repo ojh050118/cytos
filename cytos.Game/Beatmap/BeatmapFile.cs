@@ -26,7 +26,7 @@ namespace cytos.Game.Beatmap
                     sr.Close();
 
                     var beatmap = JsonConvert.DeserializeObject<BeatmapInfo>(text);
-                    var name = "test";
+                    var name = f;
 
                     beatmaps.Add((beatmap, name));
                 }

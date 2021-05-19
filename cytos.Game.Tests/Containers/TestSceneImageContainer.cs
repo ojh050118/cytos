@@ -7,11 +7,9 @@ namespace cytos.Game.Tests.Containers
 {
     public class TestSceneImageContainer : cytosTestScene
     {
-        private ImageContainer image;
-
         public TestSceneImageContainer()
         {
-            Add(image = new ImageContainer("menu-background")
+            Add(new ImageContainer("menu-background")
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,

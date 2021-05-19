@@ -25,7 +25,7 @@ namespace cytos.Game.IO.Monitors
 
         private const int retry_limit = 5;
 
-        private readonly BindableList<MonitoredFile<T>> loaded = new BindableList<MonitoredFile<T>>();
+        private readonly BindableList<MonitoredFile<T>> loaded = new();
 
         private readonly FileSystemWatcher watcher;
 
@@ -33,7 +33,7 @@ namespace cytos.Game.IO.Monitors
 
         protected readonly Storage Storage;
 
-        public MonitoredDirectoryStore(Scheduler scheduler, Storage storage = null)
+        protected MonitoredDirectoryStore(Scheduler scheduler, Storage storage = null)
         {
             this.scheduler = scheduler;
 
@@ -112,6 +112,7 @@ namespace cytos.Game.IO.Monitors
                     if (toLoad != null)
                         Add(filename, toLoad);
 
+                    wait = false;
                     break;
                 }
                 catch

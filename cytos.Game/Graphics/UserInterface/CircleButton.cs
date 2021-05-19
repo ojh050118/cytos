@@ -18,9 +18,9 @@ namespace cytos.Game.Graphics.UserInterface
             set => icon.Icon = value;
         }
 
-        private SpriteIcon icon;
+        private readonly SpriteIcon icon;
         public Action Action { get; set; }
-        private Container content;
+        private readonly Container content;
 
         public CircleButton(Action action = null)
         {
@@ -78,11 +78,10 @@ namespace cytos.Game.Graphics.UserInterface
 
         protected override bool OnClick(ClickEvent e)
         {
-            if (Action != null)
+            if (Action is not null)
                 Action.Invoke();
 
             return base.OnClick(e);
         }
-
     }
 }

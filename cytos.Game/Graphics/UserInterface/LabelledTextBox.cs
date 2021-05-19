@@ -17,7 +17,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         private CytosTextBox textBox;
 
-        public Bindable<string> Current = new Bindable<string>("");
+        public Bindable<string> Current = new("");
 
         public LabelledTextBox(string text)
         {

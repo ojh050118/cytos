@@ -13,10 +13,11 @@ using osuTK;
 
 namespace cytos.Game
 {
-    public class cytosGameBase : osu.Framework.Game
+    public class CytosGameBase : osu.Framework.Game
     {
         protected override Container<Drawable> Content { get; }
         private DependencyContainer dependencies;
+
         protected override IReadOnlyDependencyContainer CreateChildDependencies(IReadOnlyDependencyContainer parent) =>
             dependencies = new DependencyContainer(base.CreateChildDependencies(parent));
 
@@ -28,7 +29,7 @@ namespace cytos.Game
 
         private BeatmapAudioManager beatmapAudioManager;
 
-        protected cytosGameBase()
+        protected CytosGameBase()
         {
             IsDevelopmentBuild = DebugUtils.IsDebugBuild;
 
@@ -41,7 +42,7 @@ namespace cytos.Game
         [BackgroundDependencyLoader]
         private void load()
         {
-            Resources.AddStore(new DllResourceStore(typeof(cytosResources).Assembly));
+            Resources.AddStore(new DllResourceStore(typeof(CytosResources).Assembly));
             var largeStore = new LargeTextureStore(Host.CreateTextureLoaderStore(new NamespacedResourceStore<byte[]>(Resources, @"Textures")));
             largeStore.AddStore(Host.CreateTextureLoaderStore(new OnlineStore()));
 

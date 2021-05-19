@@ -9,7 +9,7 @@ namespace cytos.Game.IO
     {
         protected override string DirectoryName => @"backgrounds";
 
-        public BackgroundStore(Scheduler scheduler, Storage storage)
+        protected BackgroundStore(Scheduler scheduler, Storage storage)
             : base(scheduler, storage)
         {
         }

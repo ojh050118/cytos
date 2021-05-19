@@ -6,7 +6,7 @@ namespace cytos.Game.Graphics.UserInterface
 {
     public abstract class StatefulMenuItem : CytosMenuItem
     {
-        public readonly Bindable<object> State = new Bindable<object>();
+        public readonly Bindable<object> State = new();
 
         protected StatefulMenuItem(string text, Func<object, object> changeStateFunc, MenuItemType type = MenuItemType.Standard)
             : this(text, changeStateFunc, type, null)

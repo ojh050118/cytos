@@ -16,6 +16,5 @@ namespace cytos.Game.Tests.Audio
             AddStep("Play", () => track.Start());
             AddStep("Stop", () => track.Stop());
         }
-
     }
 }

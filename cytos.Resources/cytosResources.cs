@@ -2,8 +2,8 @@
 
 namespace cytos.Resources
 {
-    public static class cytosResources
+    public static class CytosResources
     {
-        public static Assembly ResourceAssembly => typeof(cytosResources).Assembly;
+        public static Assembly ResourceAssembly => typeof(CytosResources).Assembly;
     }
 }

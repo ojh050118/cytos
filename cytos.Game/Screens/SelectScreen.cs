@@ -40,7 +40,6 @@ namespace cytos.Game.Screens
                         Spacing = new Vector2(10),
                         Children = new Drawable[]
                         {
-
                         }
                     }
                 },
@@ -60,9 +59,9 @@ namespace cytos.Game.Screens
                             Origin = Anchor.CentreLeft,
                             AutoSizeAxes = Axes.Both,
                             Direction = FillDirection.Horizontal,
-                            Children = new CircleButton[]
+                            Children = new[]
                             {
-                                new CircleButton(() => this.Exit())
+                                new CircleButton(this.Exit)
                                 {
                                     Icon = FontAwesome.Solid.ArrowLeft,
                                     Size = new Vector2(button_size),
@@ -75,7 +74,7 @@ namespace cytos.Game.Screens
                             Origin = Anchor.CentreRight,
                             AutoSizeAxes = Axes.Both,
                             Direction = FillDirection.Horizontal,
-                            Children = new CircleButton[]
+                            Children = new[]
                             {
                                 new CircleButton
                                 {

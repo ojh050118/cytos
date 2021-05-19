@@ -69,11 +69,7 @@ namespace cytos.Game.Overlays
 
             private readonly Action confirm;
             private readonly Action decline;
-
-            private readonly Box box;
-            private readonly CytosTextFlowContainer textContainer;
-            private FillFlowContainer<BoxButton> buttonsContainer;
-            private FillFlowContainer content;
+            private readonly FillFlowContainer content;
 
             public ConfirmationWindow(string text, Action onConfirm, Action onDecline)
             {
@@ -103,7 +99,7 @@ namespace cytos.Game.Overlays
                 };
                 AddRangeInternal(new Drawable[]
                 {
-                    box = new Box
+                    new Box
                     {
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
@@ -130,7 +126,7 @@ namespace cytos.Game.Overlays
                         Y = 200,
                         Children = new Drawable[]
                         {
-                            textContainer = new CytosTextFlowContainer(s => s.Font = FontUsage.Default.With(size: 30))
+                            new CytosTextFlowContainer(s => s.Font = FontUsage.Default.With(size: 30))
                             {
                                 Anchor = Anchor.Centre,
                                 Origin = Anchor.Centre,
@@ -138,7 +134,7 @@ namespace cytos.Game.Overlays
                                 AutoSizeAxes = Axes.Y,
                                 Text = text,
                             },
-                            buttonsContainer = new FillFlowContainer<BoxButton>
+                            new FillFlowContainer<BoxButton>
                             {
                                 Anchor = Anchor.Centre,
                                 Origin = Anchor.Centre,

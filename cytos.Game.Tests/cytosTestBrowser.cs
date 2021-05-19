@@ -5,7 +5,7 @@ using osu.Framework.Testing;
 
 namespace cytos.Game.Tests
 {
-    public class cytosTestBrowser : cytosGameBase
+    public class CytosTestBrowser : CytosGameBase
     {
         protected override void LoadComplete()
         {

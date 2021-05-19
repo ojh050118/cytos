@@ -20,10 +20,5 @@ namespace cytos.Game.Tests.UserInterface
             AddStep("Show", () => loading.Show());
             AddStep("Hide", () => loading.Hide());
         }
-
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
-        }
     }
 }
