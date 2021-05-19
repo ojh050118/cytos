@@ -126,14 +126,14 @@ namespace cytos.Game.Screens.Edit
                                     },
                                     new SpriteText
                                     {
-                                        Padding = new MarginPadding{ Top = 10, Left = 60 },
+                                        Padding = new MarginPadding { Top = 10, Left = 60 },
                                         Text = "Playback speed"
                                     },
                                     playback = new CytosTabControl<Speed>
                                     {
                                         Anchor = Anchor.BottomLeft,
                                         Origin = Anchor.BottomLeft,
-                                        Margin = new MarginPadding{ Bottom = 10, Left = 60 },
+                                        Margin = new MarginPadding { Bottom = 10, Left = 60 },
                                         AutoSort = true,
                                         Size = new Vector2(240, 20),
                                     }

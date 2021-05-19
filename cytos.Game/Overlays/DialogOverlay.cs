@@ -22,7 +22,8 @@ namespace cytos.Game.Overlays
             if (currentWindow != null)
                 return;
 
-            var window = new ConfirmationWindow(text, () =>
+            var window = new ConfirmationWindow(text,
+            () =>
             {
                 onConfirm?.Invoke();
                 currentWindow = null;

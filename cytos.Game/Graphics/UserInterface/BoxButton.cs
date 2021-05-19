@@ -18,7 +18,7 @@ namespace cytos.Game.Graphics.UserInterface
         public string Text
         {
             get => sprite.Text.ToString();
-            set => sprite.Text = value;
+            init => sprite.Text = value;
         }
 
         public BoxButton(Action action, bool whiteBox = false)
