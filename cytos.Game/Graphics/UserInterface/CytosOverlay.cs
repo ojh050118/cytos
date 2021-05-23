@@ -13,7 +13,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         protected override bool StartHidden => true;
 
-        protected virtual float Dim => 0.5f;
+        protected virtual float Dim => 0.75f;
 
         private readonly Box bg;
 

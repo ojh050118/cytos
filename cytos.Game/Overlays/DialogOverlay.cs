@@ -113,7 +113,7 @@ namespace cytos.Game.Overlays
                         Alpha = 0.1f,
                         Colour = Color4.White,
                         Icon = FontAwesome.Solid.ExclamationTriangle,
-                        Size = new Vector2(Width * 0.5f),
+                        Size = new Vector2(Width * 0.4f),
                     },
                     content = new FillFlowContainer
                     {

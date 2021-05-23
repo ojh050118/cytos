@@ -16,8 +16,6 @@ namespace cytos.Game.Configuration
         {
             SetValue(CytosSetting.Volume, 1.0f);
             SetValue(CytosSetting.FpsOverlay, false);
-            SetValue(CytosSetting.BackgroundImageFile, string.Empty);
-            SetValue(CytosSetting.BackgroundTrackFile, string.Empty);
         }
     }
 
@@ -25,7 +23,5 @@ namespace cytos.Game.Configuration
     {
         Volume,
         FpsOverlay,
-        BackgroundImageFile,
-        BackgroundTrackFile
     }
 }

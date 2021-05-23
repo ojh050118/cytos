@@ -1,5 +1,6 @@
 ﻿using cytos.Game.Graphics.UserInterface;
 using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -11,8 +12,13 @@ using osuTK.Graphics;
 
 namespace cytos.Game.Screens.Edit.Setup
 {
-    public class SetupScreen : Screen
+    public class SetupScreen : EditModeScreen
     {
+        public SetupScreen()
+            : base(EditMode.Setup)
+        {
+        }
+
         /// <summary>
         /// background, track, artist, title, start BPM
         /// </summary>
@@ -22,6 +28,9 @@ namespace cytos.Game.Screens.Edit.Setup
         private void load()
         {
             Padding = new MarginPadding(50);
+            Anchor = Anchor.Centre;
+            Origin = Anchor.Centre;
+            RelativeSizeAxes = Axes.Both;
             InternalChildren = new Drawable[]
             {
                 new Container

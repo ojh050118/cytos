@@ -61,7 +61,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         protected override bool OnHover(HoverEvent e)
         {
-            hover.FadeTo(0.5f, 300, Easing.In);
+            hover.FadeTo(0.5f, 200, Easing.Out);
 
             return base.OnHover(e);
         }
@@ -70,7 +70,7 @@ namespace cytos.Game.Graphics.UserInterface
         {
             base.OnHoverLost(e);
 
-            hover.FadeTo(0, 300, Easing.In);
+            hover.FadeTo(0, 200, Easing.Out);
         }
     }
 }
