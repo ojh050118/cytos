@@ -1,3 +1,4 @@
+using cytos.Game.Beatmap;
 using cytos.Game.Configuration;
 using cytos.Game.IO;
 using cytos.Resources;
@@ -55,6 +56,7 @@ namespace cytos.Game
 
             dependencies.Cache(beatmapAudioManager);
             dependencies.CacheAs(new BackgroundImageStore(Scheduler, files));
+            dependencies.CacheAs(new BeatmapStorage(Scheduler, files));
             dependencies.Cache(largeStore);
             dependencies.CacheAs(this);
             dependencies.CacheAs(LocalConfig);

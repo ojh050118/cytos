@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using cytos.Game.Beatmap;
 using cytos.Game.Graphics.UserInterface;
 using cytos.Game.IO;
 using cytos.Game.Overlays;
@@ -35,6 +36,8 @@ namespace cytos.Game.Screens.Edit
 
         private BeatmapAudioManager audioManager;
 
+        private BeatmapStorage beatmap;
+
         [Resolved]
         private DialogOverlay dialog { get; set; }
 
@@ -47,9 +50,11 @@ namespace cytos.Game.Screens.Edit
         }
 
         [BackgroundDependencyLoader]
-        private void load(BeatmapAudioManager beatmapAudio)
+        private void load(BeatmapAudioManager beatmapAudio, BeatmapStorage beatmaps)
         {
             audioManager = beatmapAudio;
+            beatmap = beatmaps;
+            EditorMenuItem save;
 
             InternalChildren = new Drawable[]
             {
@@ -82,7 +87,15 @@ namespace cytos.Game.Screens.Edit
                                     {
                                         Items = new[]
                                         {
-                                            new EditorMenuItem("Save", MenuItemType.Standard),
+                                            new EditorMenuItem("Save", MenuItemType.Standard,
+                                            () => beatmap.CreateBeatmap(SetupScreen.TextBoxes[3].Current.Value, new BeatmapInfo
+                                            {
+                                                Author = SetupScreen.TextBoxes[2].Current.Value,
+                                                Background = SetupScreen.TextBoxes[0].Current.Value,
+                                                BPM = float.Parse(SetupScreen.TextBoxes[4].Current.Value),
+                                                Title = SetupScreen.TextBoxes[3].Current.Value,
+                                                Track = SetupScreen.TextBoxes[1].Current.Value
+                                            })),
                                             new EditorMenuItem("Exit", MenuItemType.Standard, OnExit)
                                         }
                                     },

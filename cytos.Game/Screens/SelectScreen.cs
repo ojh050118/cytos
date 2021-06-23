@@ -1,4 +1,6 @@
-﻿using cytos.Game.Graphics.UserInterface;
+﻿using cytos.Game.Beatmap;
+using cytos.Game.Graphics.Containers;
+using cytos.Game.Graphics.UserInterface;
 using cytos.Game.Screens.Edit;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
@@ -16,9 +18,13 @@ namespace cytos.Game.Screens
         private FillFlowContainer beatmaps;
         private const float button_size = 50;
 
+        private BeatmapStorage storage;
+
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(BeatmapStorage storage)
         {
+            this.storage = storage;
+
             InternalChildren = new Drawable[]
             {
                 // Todo: 나중에 사용함.
@@ -90,13 +96,34 @@ namespace cytos.Game.Screens
         protected override void LoadComplete()
         {
             base.LoadComplete();
+            
+            var beatmapList = storage.GetBeatmaps();
+
+            foreach (var beatmap in beatmapList)
+            {
+                ImageContainer container = null;
+
+                beatmaps.Add(container = new ImageContainer(beatmap.Item1.Background)
+                {
+                    RelativeSizeAxes = Axes.Y,
+                    Width = 0,
+                    Alpha = 0,
+                    Name = beatmap.Item2,
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre
+                });
+                container.FadeIn(500);
+                container.ResizeWidthTo(200, 1000, Easing.OutElastic);
+            }
 
             beatmaps.Add(new ClickableContainer
             {
                 Masking = true,
                 CornerRadius = 10,
                 RelativeSizeAxes = Axes.Y,
-                Width = 100,
+                Width = 200,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
                 Children = new Drawable[]
                 {
                     new Box

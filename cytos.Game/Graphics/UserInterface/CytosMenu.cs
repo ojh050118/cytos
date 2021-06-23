@@ -14,7 +14,7 @@ namespace cytos.Game.Graphics.UserInterface
         {
             BackgroundColour = Color4.Black.Opacity(0.5f);
 
-            MaskingContainer.CornerRadius = 4;
+            MaskingContainer.CornerRadius = 10;
             ItemsContainer.Padding = new MarginPadding(5);
         }
 
