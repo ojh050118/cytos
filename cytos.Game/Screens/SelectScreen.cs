@@ -2,6 +2,7 @@
 using cytos.Game.Graphics.Containers;
 using cytos.Game.Graphics.UserInterface;
 using cytos.Game.Screens.Edit;
+using cytos.Game.Screens.Settings;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -81,7 +82,7 @@ namespace cytos.Game.Screens
                             Direction = FillDirection.Horizontal,
                             Children = new[]
                             {
-                                new CircleButton
+                                new CircleButton(() => this.Push(new SettingScreen()))
                                 {
                                     Icon = FontAwesome.Solid.Cog,
                                     Size = new Vector2(button_size),

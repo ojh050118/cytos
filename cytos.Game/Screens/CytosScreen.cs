@@ -41,13 +41,14 @@ namespace cytos.Game.Screens
         {
             this.FadeOut(200, Easing.Out);
             this.ScaleTo(0.9f, 200, Easing.Out);
+
             return base.OnExiting(next);
         }
 
         public override void OnSuspending(IScreen next)
         {
             base.OnSuspending(next);
-            this.ScaleTo(0.9f, 200, Easing.Out);
+            //this.ScaleTo(0.9f, 200, Easing.Out);
             this.FadeOut(200, Easing.Out);
         }
 

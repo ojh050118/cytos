@@ -16,6 +16,7 @@ namespace cytos.Game.Configuration
         {
             SetValue(CytosSetting.Volume, 1.0f);
             SetValue(CytosSetting.FpsOverlay, false);
+            SetValue(CytosSetting.BlurAmount, 0);
         }
     }
 
@@ -23,5 +24,6 @@ namespace cytos.Game.Configuration
     {
         Volume,
         FpsOverlay,
+        BlurAmount
     }
 }
