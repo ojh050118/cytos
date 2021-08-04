@@ -1,4 +1,5 @@
-﻿using cytos.Game.Graphics.UserInterface;
+﻿using cytos.Game.Beatmap;
+using cytos.Game.Graphics.UserInterface;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Extensions.Color4Extensions;
@@ -14,9 +15,20 @@ namespace cytos.Game.Screens.Edit.Setup
 {
     public class SetupScreen : EditModeScreen
     {
+        private BeatmapInfo info;
+
+        private readonly bool isLoadedInfo = false;
+
         public SetupScreen()
             : base(EditMode.Setup)
         {
+        }
+
+        public SetupScreen(BeatmapInfo info)
+            : base(EditMode.Setup)
+        {
+            this.info = info;
+            isLoadedInfo = true;
         }
 
         /// <summary>
@@ -113,6 +125,15 @@ namespace cytos.Game.Screens.Edit.Setup
                     }
                 }
             };
+
+            if (isLoadedInfo)
+            {
+                TextBoxes[0].TextBox.Current.Value = info.Background;
+                TextBoxes[1].TextBox.Current.Value = info.Track;
+                TextBoxes[2].TextBox.Current.Value = info.Author;
+                TextBoxes[3].TextBox.Current.Value = info.Title;
+                TextBoxes[4].TextBox.Current.Value = info.BPM.ToString();
+            }
         }
     }
 }

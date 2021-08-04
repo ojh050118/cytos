@@ -15,7 +15,7 @@ namespace cytos.Game.Graphics.UserInterface
 
         private string text { get; init; }
 
-        private CytosTextBox textBox;
+        public CytosTextBox TextBox;
 
         public Bindable<string> Current = new("");
 
@@ -45,7 +45,7 @@ namespace cytos.Game.Graphics.UserInterface
                     Origin = Anchor.CentreLeft,
                     Margin = new MarginPadding { Left = 20 }
                 },
-                textBox = new CytosTextBox
+                TextBox = new CytosTextBox
                 {
                     Anchor = Anchor.CentreRight,
                     Origin = Anchor.CentreRight,
@@ -55,7 +55,7 @@ namespace cytos.Game.Graphics.UserInterface
                     CornerRadius = corner_radius,
                 }
             };
-            textBox.Current.ValueChanged += value =>
+            TextBox.Current.ValueChanged += value =>
             {
                 Current.Value = value.NewValue;
             };

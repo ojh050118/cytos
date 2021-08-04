@@ -19,6 +19,10 @@ namespace cytos.Game.Beatmap
             this.storage = storage?.GetStorageForDirectory("beatmaps");
         }
 
+        /// <summary>
+        /// 비트맵 정보와 파일 이름들이 있는 리스트 반환
+        /// </summary>
+        /// <returns></returns>
         public List<(BeatmapInfo, string)> GetBeatmaps()
         {
             List<(BeatmapInfo, string)> beatmaps = new List<(BeatmapInfo, string)>();
@@ -54,7 +58,23 @@ namespace cytos.Game.Beatmap
 
         public void DeleteBeatmap(string name) => Directory.Delete(storage.GetFullPath(string.Empty) + $"/{name}");
 
+        public BeatmapInfo GetBeatmapInfo(string name)
+        {
+            BeatmapInfo info = new BeatmapInfo();
 
+            foreach (var file in storage.GetFiles(string.Empty))
+            {
+                if (!name.Equals(file))
+                    continue;
+
+                StreamReader sr = File.OpenText(storage.GetFullPath(string.Empty) + $"/{file}");
+                var text = sr.ReadLine();
+                sr.Close();
+                info = JsonConvert.DeserializeObject<BeatmapInfo>(text);
+            }
+
+            return info;
+        }
     }
 
     public struct BeatmapInfo

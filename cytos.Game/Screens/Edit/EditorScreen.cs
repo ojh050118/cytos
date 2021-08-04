@@ -49,6 +49,11 @@ namespace cytos.Game.Screens.Edit
                 addScreen = () => screenContainer.Add(currentScreen = new SetupScreen());
         }
 
+        public EditorScreen(BeatmapInfo info)
+        {
+            addScreen = () => screenContainer.Add(currentScreen = new SetupScreen(info));
+        }
+
         [BackgroundDependencyLoader]
         private void load(BeatmapAudioManager beatmapAudio, BeatmapStorage beatmaps)
         {

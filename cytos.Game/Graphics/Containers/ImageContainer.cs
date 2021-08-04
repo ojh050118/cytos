@@ -1,38 +1,57 @@
 ﻿using System;
+using System.IO;
+using cytos.Game.Beatmap;
 using cytos.Game.Graphics.UserInterface;
 using cytos.Game.IO;
+using cytos.Game.Screens.Edit;
+using cytos.Game.Screens.Play;
 using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
+using osu.Framework.Platform;
+using osu.Framework.Screens;
 using osuTK.Input;
 
 namespace cytos.Game.Graphics.Containers
 {
     public class ImageContainer : ClickableContainer
     {
+        [Resolved]
+        private Storage storage { get; set; }
+
         public string TextureName { get; }
 
         public static int Radius = 10;
 
-        private readonly Action action;
+        /// <summary>
+        /// 매뉴를 클릭했을 때 액션.
+        /// RequestedNewScreen의 값이 변경되고 호출됩니다.
+        /// </summary>
+        public Action ClickedAction;
 
         private CytosMenu menu;
 
-        public ImageContainer(string texture, Action action = null)
+        private string fileName;
+
+        public IScreen RequestedNewScreen;
+
+        public ImageContainer(string texture, string name)
         {
             TextureName = texture;
-            this.action = action;
+            fileName = name;
         }
 
         [BackgroundDependencyLoader]
-        private void load(BackgroundImageStore imageStore)
+        private void load(BackgroundImageStore imageStore, BeatmapStorage beatmaps)
         {
             Masking = true;
             CornerRadius = Radius;
+            var path = storage.GetStorageForDirectory("files").GetStorageForDirectory("beatmaps");
             Children = new Drawable[]
             {
                 new Box
@@ -68,9 +87,18 @@ namespace cytos.Game.Graphics.Containers
                             State = MenuState.Closed,
                             Items = new CytosMenuItem[]
                             {
-                                new CytosMenuItem("Play"),
-                                new CytosMenuItem("Edit", MenuItemType.Highlighted),
-                                new CytosMenuItem("Delete", MenuItemType.Destructive),
+                                // Todo: 액션 추가
+                                new CytosMenuItem("Play", MenuItemType.Standard, () =>
+                                {
+                                    RequestedNewScreen = new Playfield();
+                                    ClickedAction.Invoke();
+                                }),
+                                new CytosMenuItem("Edit", MenuItemType.Highlighted, () =>
+                                {
+                                    RequestedNewScreen = new EditorScreen(beatmaps.GetBeatmapInfo(fileName));
+                                    ClickedAction.Invoke();
+                                }),
+                                new CytosMenuItem("Delete", MenuItemType.Destructive, () => File.Delete(path.GetFullPath(string.Empty) + @"\" + fileName)),
                             }
                         }
                     }
@@ -90,13 +118,6 @@ namespace cytos.Game.Graphics.Containers
                     }
                 }
             };
-            Action = action;
-        }
-
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
-            
         }
 
         protected override bool OnMouseDown(MouseDownEvent e)

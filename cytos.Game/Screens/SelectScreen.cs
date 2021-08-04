@@ -104,15 +104,16 @@ namespace cytos.Game.Screens
             {
                 ImageContainer container = null;
 
-                beatmaps.Add(container = new ImageContainer(beatmap.Item1.Background)
+                beatmaps.Add(container = new ImageContainer(beatmap.Item1.Background, beatmap.Item2)
                 {
                     RelativeSizeAxes = Axes.Y,
                     Width = 0,
                     Alpha = 0,
                     Name = beatmap.Item2,
                     Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre
+                    Origin = Anchor.Centre,
                 });
+                container.ClickedAction = () => this.Push(container.RequestedNewScreen);
                 container.FadeIn(500);
                 container.ResizeWidthTo(200, 1000, Easing.OutElastic);
             }
