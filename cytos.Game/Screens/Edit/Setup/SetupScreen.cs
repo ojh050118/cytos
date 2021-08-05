@@ -1,5 +1,7 @@
-﻿using cytos.Game.Beatmap;
+﻿using System;
+using cytos.Game.Beatmap;
 using cytos.Game.Graphics.UserInterface;
+using cytos.Game.IO;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Extensions.Color4Extensions;
@@ -7,6 +9,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Logging;
 using osu.Framework.Screens;
 using osuTK;
 using osuTK.Graphics;
@@ -18,6 +21,8 @@ namespace cytos.Game.Screens.Edit.Setup
         private BeatmapInfo info;
 
         private readonly bool isLoadedInfo = false;
+
+        private Sprite background;
 
         public SetupScreen()
             : base(EditMode.Setup)
@@ -37,7 +42,7 @@ namespace cytos.Game.Screens.Edit.Setup
         public static LabelledTextBox[] TextBoxes = new LabelledTextBox[5];
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(BackgroundImageStore imageStore)
         {
             Padding = new MarginPadding(50);
             Anchor = Anchor.Centre;
@@ -106,6 +111,16 @@ namespace cytos.Game.Screens.Edit.Setup
                                 AutoSizeAxes = Axes.Y,
                                 Children = new Drawable[]
                                 {
+                                    new Container
+                                    {
+                                        RelativeSizeAxes = Axes.X,
+                                        Height = 150,
+                                        Masking = true,
+                                        CornerRadius = 10,
+                                        Child = background = new Sprite
+                                        {
+                                        }
+                                    },
                                     new SpriteText
                                     {
                                         Text = "Resources"
@@ -125,6 +140,15 @@ namespace cytos.Game.Screens.Edit.Setup
                     }
                 }
             };
+
+            try
+            {
+                TextBoxes[0].Current.ValueChanged += value => background.Texture = imageStore.Get(value.NewValue);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, $"Background does not exist: {TextBoxes[0].Current.Value}");
+            }
 
             if (isLoadedInfo)
             {
