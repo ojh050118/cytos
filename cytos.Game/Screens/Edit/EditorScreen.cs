@@ -33,6 +33,7 @@ namespace cytos.Game.Screens.Edit
         private string currentTrack = string.Empty;
         private EditModeScreen currentScreen;
         private EditorMenuBar menuBar;
+        private SpriteText time;
 
         private BeatmapAudioManager audioManager;
 
@@ -179,6 +180,13 @@ namespace cytos.Game.Screens.Edit
                                     }
                                 }
                             }
+                        },
+                        time = new SpriteText
+                        {
+                            Padding = new MarginPadding(10),
+                            Anchor = Anchor.CentreLeft,
+                            Origin = Anchor.CentreLeft,
+                            Font = FontUsage.Default.With(size: 39)
                         }
                     }
                 },
@@ -231,6 +239,14 @@ namespace cytos.Game.Screens.Edit
             addScreen.Invoke();
             playback.Current.Value = Speed.Normal;
             menuBar.Mode.ValueChanged += onModeChanged;
+            time.Text = track.CurrentTime.ToString();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            time.Text = ((int)track.CurrentTime).ToString();
         }
 
         private void onModeChanged(ValueChangedEvent<EditMode> e)
