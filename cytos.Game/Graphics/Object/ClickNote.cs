@@ -54,6 +54,7 @@ namespace cytos.Game.Graphics.Object
         protected override bool OnClick(ClickEvent e)
         {
             this.ScaleTo(1.2f, 500, Easing.OutPow10);
+            inner.ResizeTo(0.9f, 500, Easing.OutPow10);
             this.FadeOut(400, Easing.OutPow10);
 
             return base.OnClick(e);

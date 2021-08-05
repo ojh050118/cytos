@@ -14,13 +14,23 @@ namespace cytos.Game.Screens.Play
         private Background bg;
         private Box top;
         private Box bottom;
+        private string name = string.Empty;
+
+        public Playfield()
+        {
+        }
+
+        public Playfield(string name)
+        {
+            this.name = name;
+        }
 
         [BackgroundDependencyLoader]
         private void load()
         {
             InternalChildren = new Drawable[]
             {
-                bg = new Background(@"Backgrounds/bg1")
+                bg = new Background(name.Equals(string.Empty) ? @"Backgrounds/bg1" : name, !name.Equals(string.Empty))
                 {
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre

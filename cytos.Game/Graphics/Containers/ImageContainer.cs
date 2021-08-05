@@ -40,6 +40,8 @@ namespace cytos.Game.Graphics.Containers
 
         public IScreen RequestedNewScreen;
 
+        public Action DeleteAction { get; init; }
+
         public ImageContainer(string texture, string name)
         {
             TextureName = texture;
@@ -52,6 +54,7 @@ namespace cytos.Game.Graphics.Containers
             Masking = true;
             CornerRadius = Radius;
             var path = storage.GetStorageForDirectory("files").GetStorageForDirectory("beatmaps");
+            BeatmapInfo info = beatmaps.GetBeatmapInfo(fileName);
             Children = new Drawable[]
             {
                 new Box
@@ -90,7 +93,7 @@ namespace cytos.Game.Graphics.Containers
                                 // Todo: 액션 추가
                                 new CytosMenuItem("Play", MenuItemType.Standard, () =>
                                 {
-                                    RequestedNewScreen = new Playfield();
+                                    RequestedNewScreen = new Playfield(info.Background);
                                     ClickedAction.Invoke();
                                 }),
                                 new CytosMenuItem("Edit", MenuItemType.Highlighted, () =>
@@ -98,7 +101,11 @@ namespace cytos.Game.Graphics.Containers
                                     RequestedNewScreen = new EditorScreen(beatmaps.GetBeatmapInfo(fileName));
                                     ClickedAction.Invoke();
                                 }),
-                                new CytosMenuItem("Delete", MenuItemType.Destructive, () => File.Delete(path.GetFullPath(string.Empty) + @"\" + fileName)),
+                                new CytosMenuItem("Delete", MenuItemType.Destructive, () =>
+                                {
+                                    File.Delete(path.GetFullPath(string.Empty) + @"\" + Name);
+                                    DeleteAction.Invoke();
+                                }),
                             }
                         }
                     }

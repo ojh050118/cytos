@@ -93,13 +93,13 @@ namespace cytos.Game.Screens.Edit
                                     {
                                         Items = new[]
                                         {
-                                            new EditorMenuItem("Save", MenuItemType.Standard,
-                                            () => beatmap.CreateBeatmap(SetupScreen.TextBoxes[3].Current.Value, new BeatmapInfo
+                                            save = new EditorMenuItem("Save", MenuItemType.Standard,
+                                            () => beatmap.CreateBeatmap(SetupScreen.TextBoxes[3].Current.Value.Equals(string.Empty) ? "untitled" : SetupScreen.TextBoxes[3].Current.Value, new BeatmapInfo
                                             {
                                                 Author = SetupScreen.TextBoxes[2].Current.Value,
                                                 Background = SetupScreen.TextBoxes[0].Current.Value,
-                                                BPM = float.Parse(SetupScreen.TextBoxes[4].Current.Value),
-                                                Title = SetupScreen.TextBoxes[3].Current.Value,
+                                                BPM = !SetupScreen.TextBoxes[4].Current.Value.Equals(string.Empty) ? float.Parse(SetupScreen.TextBoxes[4].Current.Value) : 0,
+                                                Title = SetupScreen.TextBoxes[3].Current.Value.Equals(string.Empty) ? "untitled" : SetupScreen.TextBoxes[3].Current.Value,
                                                 Track = SetupScreen.TextBoxes[1].Current.Value
                                             })),
                                             new EditorMenuItem("Exit", MenuItemType.Standard, OnExit)

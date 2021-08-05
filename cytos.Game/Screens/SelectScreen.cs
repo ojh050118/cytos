@@ -1,4 +1,5 @@
-﻿using cytos.Game.Beatmap;
+﻿using System.Linq;
+using cytos.Game.Beatmap;
 using cytos.Game.Graphics.Containers;
 using cytos.Game.Graphics.UserInterface;
 using cytos.Game.Screens.Edit;
@@ -8,9 +9,11 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Input.Events;
 using osu.Framework.Screens;
 using osuTK;
 using osuTK.Graphics;
+using osuTK.Input;
 
 namespace cytos.Game.Screens
 {
@@ -97,7 +100,12 @@ namespace cytos.Game.Screens
         protected override void LoadComplete()
         {
             base.LoadComplete();
-            
+
+            loadBeatmaps();
+        }
+
+        private void loadBeatmaps()
+        {
             var beatmapList = storage.GetBeatmaps();
 
             foreach (var beatmap in beatmapList)
@@ -112,6 +120,7 @@ namespace cytos.Game.Screens
                     Name = beatmap.Item2,
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
+                    DeleteAction = Refresh
                 });
                 container.ClickedAction = () => this.Push(container.RequestedNewScreen);
                 container.FadeIn(500);
@@ -123,7 +132,8 @@ namespace cytos.Game.Screens
                 Masking = true,
                 CornerRadius = 10,
                 RelativeSizeAxes = Axes.Y,
-                Width = 200,
+                Width = 0,
+                Alpha = 0,
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 Children = new Drawable[]
@@ -141,8 +151,36 @@ namespace cytos.Game.Screens
                         Size = new Vector2(30)
                     }
                 },
-                Action = () => this.Push(new EditorScreen())
+                Action = () => this.Push(new EditorScreen()),
             });
+
+            beatmaps.Children.Last().FadeIn(500);
+            beatmaps.Children.Last().ResizeWidthTo(200, 1000, Easing.OutElastic);
+        }
+
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            switch (e.Key)
+            {
+                case Key.R:
+                    Refresh();
+                    break;
+            }
+
+            return base.OnKeyDown(e);
+        }
+
+        public void Refresh()
+        {
+            foreach (var drawable in beatmaps.Children)
+            {
+                drawable.FadeOut(500);
+                drawable.ResizeWidthTo(0, 1000, Easing.OutPow10);
+                Scheduler.AddDelayed(() => beatmaps.Remove(drawable), 500);
+            }
+
+            loadBeatmaps();
+            //Scheduler.AddDelayed(loadBeatmaps, 500);
         }
     }
 }
