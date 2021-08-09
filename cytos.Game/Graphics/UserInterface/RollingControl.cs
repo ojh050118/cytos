@@ -10,7 +10,7 @@ namespace cytos.Game.Graphics.UserInterface
 {
     public class RollingControl : Container
     {
-        public string Text {  get; set; }
+        public string Text { get; set; }
 
         public RollingControl()
         {

@@ -6,7 +6,6 @@ using cytos.Game.IO;
 using cytos.Game.Screens.Edit;
 using cytos.Game.Screens.Play;
 using osu.Framework.Allocation;
-using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
@@ -79,7 +78,7 @@ namespace cytos.Game.Graphics.Containers
                         new Box
                         {
                             Colour = new Colour4(50, 50, 50, 255),
-                            Alpha = 0.8f,
+                            Alpha = 0.6f,
                             RelativeSizeAxes = Axes.Both
                         },
                         menu = new CytosMenu(Direction.Vertical, true)
@@ -93,7 +92,7 @@ namespace cytos.Game.Graphics.Containers
                                 // Todo: 액션 추가
                                 new CytosMenuItem("Play", MenuItemType.Standard, () =>
                                 {
-                                    RequestedNewScreen = new Playfield(info.Background);
+                                    RequestedNewScreen = new Playfield(info);
                                     ClickedAction.Invoke();
                                 }),
                                 new CytosMenuItem("Edit", MenuItemType.Highlighted, () =>

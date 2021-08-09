@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using cytos.Game.Graphics.Object.Types;
 using Newtonsoft.Json;
 using osu.Framework.Bindables;

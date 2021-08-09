@@ -1,5 +1,6 @@
 using cytos.Game.Beatmap;
 using cytos.Game.Configuration;
+using cytos.Game.Input;
 using cytos.Game.IO;
 using cytos.Resources;
 using osu.Framework.Allocation;
@@ -33,6 +34,7 @@ namespace cytos.Game
         protected CytosGameBase()
         {
             IsDevelopmentBuild = DebugUtils.IsDebugBuild;
+            Name = IsDevelopmentBuild ? "cytos (Development mode)" : "cytos";
 
             base.Content.Add(Content = new DrawSizePreservingFillContainer
             {
@@ -61,7 +63,12 @@ namespace cytos.Game
             dependencies.CacheAs(this);
             dependencies.CacheAs(LocalConfig);
 
-            Host.Window.Title = "cytos";
+            var mainContent = new Drawable[]
+            {
+                new CytosKeyBindingContainer(this)
+            };
+
+            base.Content.AddRange(mainContent);
         }
 
         protected override void LoadComplete()

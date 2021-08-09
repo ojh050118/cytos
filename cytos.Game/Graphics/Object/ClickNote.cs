@@ -2,7 +2,6 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
-using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input.Events;
 using osuTK;
 using osuTK.Graphics;
@@ -22,6 +21,8 @@ namespace cytos.Game.Graphics.Object
             Size = new Vector2(NOTE_SIZE);
             Alpha = 0;
             Scale = new Vector2(0.5f);
+            Anchor = Anchor.Centre;
+            Origin = Anchor.Centre;
             Children = new Drawable[]
             {
                 new Circle

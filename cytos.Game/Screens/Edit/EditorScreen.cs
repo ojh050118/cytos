@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using cytos.Game.Beatmap;
 using cytos.Game.Graphics.UserInterface;
@@ -42,6 +43,11 @@ namespace cytos.Game.Screens.Edit
         [Resolved]
         private DialogOverlay dialog { get; set; }
 
+        public static BeatmapInfo CurrentInfo = new BeatmapInfo();
+        private readonly bool isLoadedInfo = false;
+
+        public static Bindable<double> CurrentTime = new Bindable<double>(0);
+
         public EditorScreen(EditModeScreen drawable = null)
         {
             if (drawable is not null)
@@ -52,8 +58,13 @@ namespace cytos.Game.Screens.Edit
 
         public EditorScreen(BeatmapInfo info)
         {
+            isLoadedInfo = true;
+            CurrentInfo = info;
             addScreen = () => screenContainer.Add(currentScreen = new SetupScreen(info));
+
         }
+
+        #region Load()
 
         [BackgroundDependencyLoader]
         private void load(BeatmapAudioManager beatmapAudio, BeatmapStorage beatmaps)
@@ -61,6 +72,16 @@ namespace cytos.Game.Screens.Edit
             audioManager = beatmapAudio;
             beatmap = beatmaps;
             EditorMenuItem save;
+            if (CurrentInfo.Notes is null)
+            {
+                CurrentInfo.Notes = new List<Notes>();
+                Logger.Log("List<Note> created.");
+            }
+            else
+            {
+                Logger.Log($"List<Notes> | Count: {CurrentInfo.Notes.Count}");
+            }
+
 
             InternalChildren = new Drawable[]
             {
@@ -94,13 +115,15 @@ namespace cytos.Game.Screens.Edit
                                         Items = new[]
                                         {
                                             save = new EditorMenuItem("Save", MenuItemType.Standard,
-                                            () => beatmap.CreateBeatmap(SetupScreen.TextBoxes[3].Current.Value.Equals(string.Empty) ? "untitled" : SetupScreen.TextBoxes[3].Current.Value, new BeatmapInfo
+                                            () => beatmap.CreateBeatmap(CurrentInfo.Title.Equals(string.Empty) ? "untitled" : CurrentInfo.Title, new BeatmapInfo
                                             {
-                                                Author = SetupScreen.TextBoxes[2].Current.Value,
-                                                Background = SetupScreen.TextBoxes[0].Current.Value,
-                                                BPM = !SetupScreen.TextBoxes[4].Current.Value.Equals(string.Empty) ? float.Parse(SetupScreen.TextBoxes[4].Current.Value) : 0,
-                                                Title = SetupScreen.TextBoxes[3].Current.Value.Equals(string.Empty) ? "untitled" : SetupScreen.TextBoxes[3].Current.Value,
-                                                Track = SetupScreen.TextBoxes[1].Current.Value
+                                                Author = CurrentInfo.Author,
+                                                Background = CurrentInfo.Background,
+                                                BPM = !SetupScreen.TextBoxes[4].Current.Value.Equals(string.Empty) ? CurrentInfo.BPM : 0,
+                                                Title = CurrentInfo.Title.Equals(string.Empty) ? "untitled" : CurrentInfo.Title,
+                                                Track = CurrentInfo.Track,
+                                                Offset = !SetupScreen.TextBoxes[5].Current.Value.Equals(string.Empty) ? CurrentInfo.Offset : 0,
+                                                Notes = CurrentInfo.Notes
                                             })),
                                             new EditorMenuItem("Exit", MenuItemType.Standard, OnExit)
                                         }
@@ -224,12 +247,16 @@ namespace cytos.Game.Screens.Edit
                 }
                 catch (Exception e)
                 {
-                    Logger.Error(e, $"Track does not exist: {SetupScreen.TextBoxes[1].Current.Value}");
+                    Logger.Log($"Track does not exist: {CurrentInfo.Track}", level: LogLevel.Error);
                     track.Stop();
                     play.Icon = FontAwesome.Solid.Play;
                 }
             };
         }
+
+        #endregion
+
+        #region LoadComplete()
 
         protected override void LoadComplete()
         {
@@ -240,7 +267,29 @@ namespace cytos.Game.Screens.Edit
             playback.Current.Value = Speed.Normal;
             menuBar.Mode.ValueChanged += onModeChanged;
             time.Text = track.CurrentTime.ToString();
+            CurrentTime.Value = track.CurrentTime;
+
+            CurrentInfo.Background = SetupScreen.TextBoxes[0].Current.Value;
+            CurrentInfo.Track = SetupScreen.TextBoxes[1].Current.Value;
+            CurrentInfo.Author = SetupScreen.TextBoxes[2].Current.Value;
+            CurrentInfo.Title = SetupScreen.TextBoxes[3].Current.Value;
+
+            if (!SetupScreen.TextBoxes[4].Current.Value.Equals(string.Empty))
+                CurrentInfo.BPM = float.Parse(SetupScreen.TextBoxes[4].Current.Value);
+            if (!SetupScreen.TextBoxes[5].Current.Value.Equals(string.Empty))
+                CurrentInfo.Offset = float.Parse(SetupScreen.TextBoxes[5].Current.Value);
+
+            SetupScreen.TextBoxes[0].Current.ValueChanged += value => CurrentInfo.Background = value.NewValue;
+            SetupScreen.TextBoxes[1].Current.ValueChanged += value => CurrentInfo.Track = value.NewValue;
+            SetupScreen.TextBoxes[2].Current.ValueChanged += value => CurrentInfo.Author = value.NewValue;
+            SetupScreen.TextBoxes[3].Current.ValueChanged += value => CurrentInfo.Title = value.NewValue;
+            SetupScreen.TextBoxes[4].Current.ValueChanged += value => CurrentInfo.BPM = !SetupScreen.TextBoxes[4].Current.Value.Equals(string.Empty) ? float.Parse(value.NewValue) : 0;
+            SetupScreen.TextBoxes[5].Current.ValueChanged += value => CurrentInfo.Offset = !SetupScreen.TextBoxes[5].Current.Value.Equals(string.Empty) ? float.Parse(value.NewValue) : 0;
         }
+
+        #endregion
+
+        #region Update()
 
         protected override void Update()
         {
@@ -248,6 +297,10 @@ namespace cytos.Game.Screens.Edit
 
             time.Text = ((int)track.CurrentTime).ToString();
         }
+
+        #endregion
+
+        #region onModeChanged()
 
         private void onModeChanged(ValueChangedEvent<EditMode> e)
         {
@@ -270,18 +323,37 @@ namespace cytos.Game.Screens.Edit
                     return;
                 }
 
-                switch (e.NewValue)
+                if (isLoadedInfo)
                 {
-                    case EditMode.Setup:
-                        currentScreen = new SetupScreen();
-                        break;
-                    case EditMode.Compose:
-                        currentScreen = new ComposeScreen();
-                        break;
-                    case EditMode.Timing:
-                        currentScreen = new TimingScreen();
-                        break;
+                    switch (e.NewValue)
+                    {
+                        case EditMode.Setup:
+                            currentScreen = new SetupScreen(CurrentInfo);
+                            break;
+                        case EditMode.Compose:
+                            currentScreen = new ComposeScreen(CurrentInfo);
+                            break;
+                        case EditMode.Timing:
+                            currentScreen = new TimingScreen();
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (e.NewValue)
+                    {
+                        case EditMode.Setup:
+                            currentScreen = new SetupScreen();
+                            break;
+                        case EditMode.Compose:
+                            currentScreen = new ComposeScreen();
+                            break;
+                        case EditMode.Timing:
+                            currentScreen = new TimingScreen();
+                            break;
+                    }
+                }
+
 
                 LoadComponentAsync(currentScreen, newScreen =>
                 {
@@ -293,6 +365,8 @@ namespace cytos.Game.Screens.Edit
             {
             }
         }
+
+        #endregion
 
         protected override void OnExit()
         {

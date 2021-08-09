@@ -3,14 +3,12 @@ using cytos.Game.Beatmap;
 using cytos.Game.Graphics.UserInterface;
 using cytos.Game.IO;
 using osu.Framework.Allocation;
-using osu.Framework.Bindables;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Logging;
-using osu.Framework.Screens;
 using osuTK;
 using osuTK.Graphics;
 
@@ -37,9 +35,9 @@ namespace cytos.Game.Screens.Edit.Setup
         }
 
         /// <summary>
-        /// background, track, artist, title, start BPM
+        /// background, track, artist, title, start BPM, Offset
         /// </summary>
-        public static LabelledTextBox[] TextBoxes = new LabelledTextBox[5];
+        public static LabelledTextBox[] TextBoxes = new LabelledTextBox[6];
 
         [BackgroundDependencyLoader]
         private void load(BackgroundImageStore imageStore)
@@ -133,7 +131,13 @@ namespace cytos.Game.Screens.Edit.Setup
                                     },
                                     TextBoxes[2] = new LabelledTextBox("Artist"),
                                     TextBoxes[3] = new LabelledTextBox("Title"),
-                                    TextBoxes[4] = new LabelledTextBox("Start BPM")
+                                    TextBoxes[4] = new LabelledTextBox("Start BPM"),
+                                    TextBoxes[5] = new LabelledTextBox("Offset"),
+                                    new Container
+                                    {
+                                        RelativeSizeAxes = Axes.X,
+                                        Height = 150
+                                    }
                                 }
                             }
                         },
@@ -157,6 +161,7 @@ namespace cytos.Game.Screens.Edit.Setup
                 TextBoxes[2].TextBox.Current.Value = info.Author;
                 TextBoxes[3].TextBox.Current.Value = info.Title;
                 TextBoxes[4].TextBox.Current.Value = info.BPM.ToString();
+                TextBoxes[5].TextBox.Current.Value = info.Offset.ToString();
             }
         }
     }

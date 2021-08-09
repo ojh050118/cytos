@@ -84,12 +84,13 @@ namespace cytos.Game.Beatmap
         public string Background;
         public string Track;
         public float BPM;
-        public Notes[] Notes;
+        public float Offset;
+        public List<Notes> Notes;
     }
     public struct Notes
     {
         public NoteType NoteType;
-        public float StartTime;
+        public double StartTime;
         public Vector2[] Positions;
     }
 

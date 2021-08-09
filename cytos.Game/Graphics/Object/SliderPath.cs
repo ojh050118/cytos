@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using cytos.Game.Graphics.Object.Types;
 using Newtonsoft.Json;
 using osu.Framework.Bindables;

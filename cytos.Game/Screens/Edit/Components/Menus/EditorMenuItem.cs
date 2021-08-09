@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using cytos.Game.Graphics.UserInterface;
 
 namespace cytos.Game.Screens.Edit.Components.Menus

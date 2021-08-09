@@ -180,7 +180,6 @@ namespace cytos.Game.Screens
             }
 
             loadBeatmaps();
-            //Scheduler.AddDelayed(loadBeatmaps, 500);
         }
     }
 }
