@@ -68,6 +68,7 @@ namespace cytos.Game
                 new CytosKeyBindingContainer(this)
             };
 
+            Host.Window.Title = Name;
             base.Content.AddRange(mainContent);
         }
 

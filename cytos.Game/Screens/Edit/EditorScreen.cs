@@ -54,6 +54,8 @@ namespace cytos.Game.Screens.Edit
                 addScreen = () => screenContainer.Add(drawable);
             else
                 addScreen = () => screenContainer.Add(currentScreen = new SetupScreen());
+
+            CurrentInfo = new BeatmapInfo();
         }
 
         public EditorScreen(BeatmapInfo info)
@@ -296,6 +298,7 @@ namespace cytos.Game.Screens.Edit
             base.Update();
 
             time.Text = ((int)track.CurrentTime).ToString();
+            CurrentTime.Value = track.CurrentTime;
         }
 
         #endregion

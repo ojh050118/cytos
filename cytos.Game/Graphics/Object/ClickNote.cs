@@ -46,19 +46,27 @@ namespace cytos.Game.Graphics.Object
         protected override void LoadComplete()
         {
             base.LoadComplete();
+        }
 
+        protected override bool OnClick(ClickEvent e)
+        {
+            Hide();
+
+            return base.OnClick(e);
+        }
+
+        public override void Show()
+        {
             this.ScaleTo(1, 1000, Easing.OutPow10);
             this.FadeIn(800, Easing.OutPow10);
             inner.ResizeTo(0.8f, 1200, Easing.OutPow10);
         }
 
-        protected override bool OnClick(ClickEvent e)
+        public override void Hide()
         {
             this.ScaleTo(1.2f, 500, Easing.OutPow10);
             inner.ResizeTo(0.9f, 500, Easing.OutPow10);
             this.FadeOut(400, Easing.OutPow10);
-
-            return base.OnClick(e);
         }
     }
 }

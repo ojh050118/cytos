@@ -77,6 +77,7 @@ namespace cytos.Game.Screens.Edit.Compose
                         {
                             Position = note.Positions[0]
                         });
+                        Children.Last().Show();
                     }
                 }
             }
@@ -88,23 +89,31 @@ namespace cytos.Game.Screens.Edit.Compose
                 input = GetContainingInputManager();
             }
 
-
-            protected override bool OnClick(ClickEvent e)
+            private ClickNote createClickNote()
             {
                 var sizeDiv2 = DrawSize / 2;
                 ClickNote obj;
 
                 // 원점은 화면에서 중심. 따라서 오브젝트의 위치중에서 음수 값이 나올 수 있음.
-                Add(obj = new ClickNote
+                obj = new ClickNote
                 {
                     Position = ToLocalSpace(input.CurrentState.Mouse.Position) - sizeDiv2
-                });
+                };
                 EditorScreen.CurrentInfo.Notes.Add(new Notes
                 {
                     NoteType = NoteType.Click,
                     Positions = new Vector2[] { obj.Position },
-                    StartTime = EditorScreen.CurrentTime.Value - 1000
+                    StartTime = EditorScreen.CurrentTime.Value
                 });
+
+                return obj;
+            }
+
+            protected override bool OnClick(ClickEvent e)
+            {
+                ClickNote obj;
+                Add(obj = createClickNote());
+                obj.Show();
 
                 return base.OnClick(e);
             }
@@ -119,6 +128,16 @@ namespace cytos.Game.Screens.Edit.Compose
                             Remove(Children.Last());
                             EditorScreen.CurrentInfo.Notes.Remove(EditorScreen.CurrentInfo.Notes.Last());
                         }
+                        break;
+
+                    case Key.Z:
+                        Add(createClickNote());
+                        Children.Last().Show();
+                        break;
+
+                    case Key.X:
+                        Add(createClickNote());
+                        Children.Last().Show();
                         break;
                 }
 

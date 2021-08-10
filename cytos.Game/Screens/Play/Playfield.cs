@@ -1,5 +1,6 @@
 ﻿using cytos.Game.Beatmap;
 using cytos.Game.Graphics.Backgrounds;
+using cytos.Game.Graphics.Object;
 using cytos.Game.IO;
 using osu.Framework.Allocation;
 using osu.Framework.Audio.Track;
@@ -22,6 +23,7 @@ namespace cytos.Game.Screens.Play
         private bool onEditor;
         private DrawableTrack track;
         private Track trackSource;
+        private Container container;
 
         public Playfield(BeatmapInfo info, bool onEditor = false)
         {
@@ -83,6 +85,13 @@ namespace cytos.Game.Screens.Play
                             Width = 0,
                             Colour = Color4.White
                         },
+                        container = new Container
+                        {
+                            Anchor = Anchor.Centre,
+                            Origin = Anchor.Centre,
+                            RelativeSizeAxes = Axes.X,
+                            Padding = new MarginPadding { Vertical = 50 }
+                        },
                         judgeLine = new Box
                         {
                             Anchor = Anchor.TopCentre,
@@ -121,6 +130,21 @@ namespace cytos.Game.Screens.Play
                 {
                     track = new DrawableTrack(trackSource);
                     track.Start();
+                }
+
+                if (track is not null && IsLoaded && info.Notes is not null)
+                {
+                    foreach (var note in info.Notes)
+                    {
+                        var time = note.StartTime < 0 ? 0 : note.StartTime;
+                        ClickNote clickNote;
+                        container.Add(clickNote = new ClickNote
+                        {
+                            Position = note.Positions[0]
+                        });
+                        Scheduler.AddDelayed(clickNote.Show, info.Offset + time);
+                        Scheduler.AddDelayed(clickNote.Hide, info.Offset + time + (60000 / info.BPM) * 2);
+                    }
                 }
             }
         }
